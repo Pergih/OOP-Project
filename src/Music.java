@@ -1,38 +1,39 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+
 import java.util.Objects;
+
 /**
- * Represents a music with a name interpreter, record_label, genres,lyrics, music, duration and streams .
+ * Represents a music with a name interpreter, record_label, genres,lyrics,
+ * music, duration and streams .
  */
-public class Music {
+public abstract class Music {
     private String name, interpreter, record_label;
     private HashSet<Genre> genres;
-    private ArrayList <String> lyrics, music;
+    private ArrayList<String> lyrics, music;
     private int duration, streams;
 
     /**
-     * Constructs a new Music.
+     * Constructs a new Music with no parameters.
      *
      *
      */
 
-    
     public Music() {
         lyrics = new ArrayList<>();
         music = new ArrayList<>();
-        genres= new HashSet<>();
+        genres = new HashSet<>();
         name = new String();
         interpreter = new String();
         record_label = new String();
         duration = 0;
         streams = 0;
     }
-    
-    
+
     /**
      * Constructs a new Music with parameters.
      *
-     * @param name 
+     * @param name
      * @param interpreter
      * @param genres
      * @param record_label
@@ -44,7 +45,7 @@ public class Music {
      */
 
     public Music(String name, String interpreter, String record_label, HashSet<Genre> genres,
-    ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
+            ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         this.name = name;
         this.interpreter = interpreter;
         this.record_label = record_label;
@@ -52,134 +53,227 @@ public class Music {
         this.streams = streams;
         this.lyrics = lyrics;
         this.music = music;
-        this.genres= new HashSet<>(genres);
+        this.genres = genres;
     }
+
     /**
      * Constructs a new Music with a pre constructed Music.
-     *@param Music
      * 
-     * 
+     * @param Music
      */
     public Music(Music m) {
         this.name = m.getName();
         this.interpreter = m.getInterpreter();
         this.record_label = m.getRecLab();
-        this.genres=m.getGenres();
+        this.genres = m.getGenres();
         this.lyrics = m.getLyrics();
         this.music = m.getMusic();
         this.duration = m.getDuration();
         this.streams = m.getStreams();
     }
 
-    /**
-     * clone equals toString
-     */
-
-    
-
+   /**
+ * Checks if this music object is equal to another object.
+ *
+ * @param object the object to compare with
+ * @return true if the objects are equal, false otherwise
+ */
     public boolean equals(Object o) {
-        if (this == o) return true; // Same object
-        if (o == null || getClass() != o.getClass()) return false; // Check class type
+        if (this == o)
+            return true; // Same object
+        if (o == null || getClass() != o.getClass())
+            return false; // Check class type
 
         Music music = (Music) o;
-        return duration == music.duration &&
-                streams == music.streams &&
+        return this.duration == music.duration &&
+                this.streams == music.streams &&
+                Objects.equals(this.genres, music.genres) &&
                 Objects.equals(name, music.name) &&
                 Objects.equals(interpreter, music.interpreter) &&
                 Objects.equals(record_label, music.record_label) &&
-                Objects.equals(genero, music.genero) &&
                 Objects.equals(lyrics, music.lyrics) &&
                 Objects.equals(this.music, music.music);
     }
 
+    /**
+     * Convert the music in a String
+     * 
+     * @param object
+     * @return Bool
+     */
     public String toString() {
-        return  "Music{\n" +
-                "name: " + name + '\n' +
-                "interpreter: " + interpreter + '\n' +
-                "record_label: " + record_label + '\n' +
-                "genero: " + genero + '\n' +
-                "lyrics: " + lyrics + '\n' +
-                "music: " + music + '\n' +
-                "duration: " + duration + '\n' +
-                "streams: " + streams + '\n' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(this.name).append('\n');
+        sb.append("Interpreter: ").append(this.interpreter).append('\n');
+        sb.append("Record Label: ").append(this.record_label).append('\n');
+        sb.append("Genres: ").append(this.genres).append('\n');
+        sb.append("Lyrics:  ").append(this.lyrics).append('\n');
+        sb.append("Music: ").append(this.music).append('\n');
+        sb.append("Duration: ").append(this.duration).append('\n');
+        sb.append("Streams: ").append(this.streams).append('\n');
+        return sb.toString();
     }
 
-
-
-    
+    /**
+     * Gives the hashcode for a music
+     * 
+     * @return int
+     */
+    public int hashCode() {
+        int hash = 12;
+        hash = 37 * hash + this.name.hashCode();
+        hash = 37 * hash + this.interpreter.hashCode();
+        hash = 37 * hash + this.name.hashCode();
+        hash = 37 * hash + this.duration;
+        hash = 37 * hash + this.record_label.hashCode();
+        return hash;
+    }
 
     /**
-     * Getters e Setters
+     * Returns the music's name.
+     *
+     * @return name
      */
 
-     public String getName() {
+    public String getName() {
         return name;
     }
 
+    /**
+     * Sets the music's name.
+     *
+     * @param name the string of name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Returns the music's interpreter.
+     *
+     * @return interpreter
+     */
     public String getInterpreter() {
         return interpreter;
     }
 
+    /**
+     * Sets the music's interpreter.
+     *
+     * @param interpreter the stirng of interpreter to set
+     */
     public void setInterpreter(String interpreter) {
         this.interpreter = interpreter;
     }
 
+    /**
+     * Returns the music's record label.
+     *
+     * @return record_label
+     */
     public String getRecLab() {
         return record_label;
     }
 
+    /**
+     * Sets the music's record label.
+     *
+     * @param record_label the string of record_label to set
+     */
     public void setRecLab(String record_label) {
         this.record_label = record_label;
     }
 
-   
-
- 
-
-    public ArrayList <String> getLyrics() {
-        return lyrics;
+    /**
+     * Returns the music's lyrics.
+     *
+     * @return lyrics
+     */
+    public ArrayList<String> getLyrics() {
+        return new ArrayList<>(lyrics);
     }
 
-    public void setLyrics(ArrayList <String> lyrics) {
-        this.lyrics = lyrics;
+    /**
+     * Sets the music's lyrics.
+     *
+     * @param lyrics the lyrics to set
+     */
+    public void setLyrics(ArrayList<String> lyrics) {
+        this.lyrics = new ArrayList<>(lyrics);
     }
 
-    public ArrayList <String> getMusic() {
-        return music;
+    /**
+     * Returns the music's music.
+     *
+     * @return music
+     */
+    public ArrayList<String> getMusic() {
+        return new ArrayList<>(music);
     }
 
-    public void setMusic(ArrayList <String> music) {
-        this.music = music;
+    /**
+     * Sets the music's music.
+     *
+     * @param music the music to set
+     */
+    public void setMusic(ArrayList<String> music) {
+        this.music = new ArrayList<>(music);
     }
 
+    /**
+     * Returns the music's duration.
+     *
+     * @return duration
+     */
     public int getDuration() {
         return duration;
     }
 
+    /**
+     * Sets the music's duration.
+     *
+     * @param duration the number to set
+     */
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
+    /**
+     * Returns the music's streams.
+     *
+     * @return streams
+     */
     public int getStreams() {
         return streams;
     }
 
+    /**
+     * Sets the music's streams.
+     *
+     * @param streams the number to set
+     */
     public void setStreams(int streams) {
         this.streams = streams;
     }
 
+    /**
+     * Returns the music's genres.
+     *
+     * @return genres
+     */
+    public HashSet<Genre> getGenres() {
+        return new HashSet<>(genres);
 
-    
-
-
+    }
 
     /**
-     * Metodos
+     * Sets the music's genres.
+     *
+     * @param genres the genres to set
      */
+    public void setGenres(HashSet<Genre> genres) {
+        this.genres = new HashSet<>(genres);
+
+    }
 
 }
