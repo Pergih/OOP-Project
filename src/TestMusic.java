@@ -55,6 +55,8 @@ public class TestMusic {
         
         
         System.out.println(m2); // Calls toString()
+        m2.playMusic();
+        System.out.println(m2);
         
 
     }
