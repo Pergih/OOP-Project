@@ -1,6 +1,13 @@
-class PlanFree implements Plan {
-    public boolean allows(Playlist p) {
-        // por o resto qnd tiver
-        return !(p instanceof Favorites || p instanceof PrivatePlaylist || p instanceof PublicPlaylist);
+public class PlanFree extends Plan {
+    public int getPointsOnJoin() {
+        return 0;
+    }
+
+    public int getPointsOnStream(User user) {
+        return 5;
+    }
+
+    public boolean allows(MusicCollection p) {
+        return !(p instanceof Favorites || p instanceof PrivatePlaylist);
     }
 }

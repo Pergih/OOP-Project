@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,12 +23,12 @@ public class User {
         history = new ArrayList<Streamed>();
     }
 
-    public User(String name, String email, String address, Plan plan, Library library, ArrayList<Streamed> history, int points) {
+    public User(String name, String email, String address, Plan plan, ArrayList<MusicCollection> library, ArrayList<Streamed> history, int points) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.plan = plan;
-        this.library = library;
+        this.library = new ArrayList<>(library);
         this.history = new ArrayList<>(history);
         this.points = points;
     }
@@ -37,7 +38,7 @@ public class User {
         this.email = other.email;
         this.address = other.address;
         this.plan = other.plan; // shallow copy (assumes Plan is immutable or safely shared)
-        this.library = other.library; // same as above
+        this.library = new ArrayList<>(other.library); // same as above
         this.history = new ArrayList<>(other.history);
         this.points = other.points;
     }
@@ -62,8 +63,8 @@ public class User {
         return plan;
     }
 
-    public Library getLibrary() {
-        return library;
+    public ArrayList<MusicCollection> getLibrary() {
+        return new ArrayList<>(library);
     }
 
     public ArrayList<Streamed> getHistory() {
@@ -88,11 +89,12 @@ public class User {
     }
 
     public void setPlan(Plan plan) {
+        this.points += plan.getPointsOnJoin();
         this.plan = plan;
     }
 
-    public void setLibrary(Library library) {
-        this.library = library;
+    public void setLibrary(ArrayList<MusicCollection> library) {
+        this.library = new ArrayList<>(library);
     }
 
     public void setHistory(ArrayList<Streamed> history) {
@@ -144,13 +146,25 @@ public class User {
 
 
     // example for now
-    public void addPlaylist(Playlist playlist) {
+    public void addPlaylist(MusicCollection playlist) {
         if (plan.allows(playlist)) {
-            library.addPlaylist(playlist);
+            library.add(playlist);
         } else {
             // maybe its not SecurityException we have other ones
             throw new SecurityException("This playlist type is not allowed for your plan");
         }
+    }
+
+    public void play(Music music) {
+        //making the music count++
+        music.play();
+
+        // adding the points
+        this.points += plan.getPointsOnStream(this);;
+
+        // adding to history
+        Streamed stream = new Streamed(music.getName(), LocalDateTime.now());
+        history.add(stream);
     }
 
 }
