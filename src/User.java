@@ -1,25 +1,27 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Utilizador {
-    private String nome, email, morada, planoSub;
-    private ArrayList<Playlist> playlists;
-    private int pontos;
+public class User {
+    private String nome, email, address, plan;
+    private Library library;
+    private ArrayList<Streamed> history;
+    private int points;
 
     /**
      * Construtores
      */
 
-    public Utilizador() {
-        playlists = new ArrayList<>();
+    public User() {
         nome = new String();
         email = new String();
-        morada = new String();
-        planoSub = "Free";
-        pontos = 0;
+        address = new String();
+        plan = "Free";
+        points = 0;
+        library = new Library();
+        history = new ArrayList<Streamed>();
     }
 
-    public Utilizador(String nome, String email, String morada, String planoSub,
+    public User(String nome, String email, String morada, String planoSub,
                       ArrayList<Playlist> playlists, int pontos) {
         this.nome = nome;
         this.email = email;
@@ -30,7 +32,7 @@ public class Utilizador {
 
     }
 
-    public Utilizador(Utilizador u) {
+    public User(User u) {
         this.nome = u.getNome();
         this.email = u.getEmail();
         this.morada = u.getMorada();
@@ -43,8 +45,8 @@ public class Utilizador {
      * clone equals toString
      */
 
-    public Utilizador clone() {
-        return new Utilizador(this);
+    public User clone() {
+        return new User(this);
     }
 
     public boolean equals(Object o) {
@@ -53,7 +55,7 @@ public class Utilizador {
         if (o == null || getClass() != o.getClass())
             return false; // Check class type
 
-        Utilizador utilizador = (Utilizador) o;
+        User utilizador = (User) o;
         return pontos == utilizador.pontos &&
                 Objects.equals(nome, utilizador.nome) &&
                 Objects.equals(email, utilizador.email) &&
