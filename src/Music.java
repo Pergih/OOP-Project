@@ -276,4 +276,8 @@ public abstract class Music {
 
     }
 
+    public void playMusic(){
+        this.streams+=1;
+        System.out.println(this.lyrics);
+    }
 }
