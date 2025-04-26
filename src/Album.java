@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Album implements MusicCollection {
+public class Album implements MusicCollection, Serializable {
     private String name;
     private HashSet<String> authors;
     private ArrayList<Music> musicList;

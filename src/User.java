@@ -1,9 +1,10 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.io.*;
 
-public class User {
-    private String name, email, address;
+public class User implements Serializable{
+    private String handle, name, email, address;
     private Plan plan;
     private ArrayList<MusicCollection> library;
     private ArrayList<Streamed> history;
@@ -14,26 +15,29 @@ public class User {
      */
 
     public User() {
+        handle = new String();
         name = new String();
         email = new String();
         address = new String();
-        plan = null; // (To Do) Default is freePlan
-        points = 0;
+        plan = new PlanFree(); // Default is freePlan
         library = new ArrayList<MusicCollection>();
         history = new ArrayList<Streamed>();
+        points = 0;
     }
 
-    public User(String name, String email, String address, Plan plan, ArrayList<MusicCollection> library, ArrayList<Streamed> history, int points) {
+    public User(String handle, String name, String email, String address, Plan plan) {
+        this.handle = handle;
         this.name = name;
         this.email = email;
         this.address = address;
         this.plan = plan;
-        this.library = new ArrayList<>(library);
-        this.history = new ArrayList<>(history);
-        this.points = points;
+        library = new ArrayList<MusicCollection>();
+        history = new ArrayList<Streamed>();
+        this.points = 0;
     }
 
     public User(User other) {
+        this.handle = other.handle;
         this.name = other.name;
         this.email = other.email;
         this.address = other.address;
@@ -47,7 +51,12 @@ public class User {
      * Getters e Setters
      */
 
-     public String getName() {
+
+    public String getHandle() {
+        return handle;
+    }
+    
+    public String getName() {
         return name;
     }
 
@@ -76,6 +85,11 @@ public class User {
     }
 
     // Setters
+
+    public void setHandle(String handle) {
+        this.handle = handle;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -130,7 +144,8 @@ public class User {
 
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "handle='" + handle + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", plan=" + plan +
@@ -157,7 +172,7 @@ public class User {
 
     public void play(Music music) {
         //making the music count++
-        music.play();
+        music.playMusic();
 
         // adding the points
         this.points += plan.getPointsOnStream(this);;

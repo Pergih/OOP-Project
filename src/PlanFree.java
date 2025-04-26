@@ -8,6 +8,7 @@ public class PlanFree extends Plan {
     }
 
     public boolean allows(MusicCollection p) {
-        return !(p instanceof Favorites || p instanceof PrivatePlaylist);
+        return true;
+        // return !(p instanceof Favorites || p instanceof PrivatePlaylist);
     }
 }

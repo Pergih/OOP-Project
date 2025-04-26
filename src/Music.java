@@ -278,6 +278,7 @@ public abstract class Music {
 
     public void playMusic(){
         this.streams+=1;
+        // normalemnte so a main da print
         System.out.println(this.lyrics);
     }
 }

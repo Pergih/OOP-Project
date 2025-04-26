@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Playlist implements MusicCollection {
+public class Playlist implements MusicCollection, Serializable {
 
     //algum burro fez isto não abstract mas isso é para depois
 
