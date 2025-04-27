@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Streamed {
+public class Streamed implements Serializable{
     private String musicName;
     private LocalDateTime time;
 

@@ -31,6 +31,11 @@ public class NormalMusic extends Music {
      * 
      */
     public NormalMusic(String name, String interpreter, String record_label, HashSet<Genre> genres,
+            ArrayList<String> lyrics, ArrayList<String> music, int duration) {
+        super(name, interpreter, record_label, genres, lyrics, music, duration);
+
+    }
+    public NormalMusic(String name, String interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         super(name, interpreter, record_label, genres, lyrics, music, duration, streams);
 

@@ -60,6 +60,9 @@ public class SpotifUM implements Serializable {
     public Music getMusic(String music) {
         return musics.get(music);
     }
+    public Set<String> getMusicNames() {
+        return musics.keySet();
+    }
     
     public Album getAlbum(String album) {
         return albums.get(album);

@@ -32,6 +32,11 @@ public class MediaMusic extends Music {
      * @param video
      */
     public MediaMusic(String name, String interpreter, String record_label, HashSet<Genre> genres,
+            ArrayList<String> lyrics, ArrayList<String> music, int duration) {
+        super(name, interpreter, record_label, genres, lyrics, music, duration);
+        this.video=1;
+    }
+    public MediaMusic(String name, String interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         super(name, interpreter, record_label, genres, lyrics, music, duration, streams);
         this.video=1;

@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -7,7 +8,7 @@ import java.util.Objects;
  * Represents a music with a name interpreter, record_label, genres,lyrics,
  * music, duration and streams .
  */
-public abstract class Music {
+public abstract class Music implements Serializable{
     private String name, interpreter, record_label;
     private HashSet<Genre> genres;
     private ArrayList<String> lyrics, music;
@@ -43,6 +44,19 @@ public abstract class Music {
      * @param streams
      * 
      */
+
+
+     public Music(String name, String interpreter, String record_label, HashSet<Genre> genres,
+                  ArrayList<String> lyrics, ArrayList<String> music, int duration) {
+        this.name = name;
+        this.interpreter = interpreter;
+        this.record_label = record_label;
+        this.duration = duration;
+        this.lyrics = lyrics;
+        this.music = music;
+        this.genres = genres;
+        this.streams = 0;
+    }
 
     public Music(String name, String interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
@@ -278,7 +292,5 @@ public abstract class Music {
 
     public void playMusic(){
         this.streams+=1;
-        // normalemnte so a main da print
-        System.out.println(this.lyrics);
     }
 }

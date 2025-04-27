@@ -87,8 +87,9 @@ public class Main {
                 switch (input) {
                     case "2":
                         System.out.print("Enter music to stream (or 'exit'): ");
+                        // print top 5 songs as recommendation?
                         String musicString = scanner.nextLine();
-                        if (musicString.equals("exit")) break;
+                        if (musicString.equalsIgnoreCase("exit")) break;
                         Music music = spotifUM.getMusic(musicString);
                         if (music == null) {System.out.print("Music not found"); continue;}
                         user.play(music);
@@ -97,6 +98,8 @@ public class Main {
                     case "3":
                         System.out.println("Your total Points: " + user.getPoints());
                         break;
+                    case "0":
+                        return;
             }
         }
     }
@@ -138,21 +141,21 @@ public class Main {
     // ========== ADMIN MODE ==========
 
     private static void adminMode(Scanner scanner, SpotifUM spotifUM) {
-        System.out.println("\n🔐 Admin mode activated.");
+        System.out.println("\nAdmin mode activated.");
         while (true) {
             System.out.println("\nAdmin options:");
             System.out.println("1. Add music");
             System.out.println("2. Add album");
             System.out.println("3. Add playlist");
+            System.out.println("4. Show musics");
             System.out.println("0. Exit admin");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
-                    System.out.print("Enter music name: ");
-                    String music = scanner.nextLine();
-                    // spotifUM.addMusic(music);
+                    Music music = addMusic(scanner);
+                    spotifUM.addMusic(music);
                     System.out.println("Music added: " + music);
                     break;
 
@@ -163,6 +166,11 @@ public class Main {
                     System.out.println("Album added: " + album);
                     break;
 
+                case "4":
+                    System.out.print("Showing all the Musics:\n" + spotifUM.getMusics().toString());
+                    break;
+
+                
                 case "0":
                     System.out.println("Exiting admin mode.");
                     return;
@@ -172,4 +180,89 @@ public class Main {
             }
         }
     }
+
+    private static Music addMusic(Scanner scanner) {
+        System.out.print("Music name: ");
+        String name = scanner.nextLine();
+    
+        System.out.print("Interpreter (artist name): ");
+        String interpreter = scanner.nextLine();
+    
+        System.out.print("Record label: ");
+        String recordLabel = scanner.nextLine();
+    
+        // Genres
+        HashSet<Genre> genres = new HashSet<>();
+        System.out.println("Available genres:");
+        for (Genre genre : Genre.values()) {
+            System.out.println("- " + genre.name());
+        }
+        System.out.print("Enter genres (comma separated and capital): ");
+        String genresInput = scanner.nextLine();
+        for (String g : genresInput.split(",")) {
+            try {
+                genres.add(Genre.valueOf(g.trim().toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Unknown genre: " + g.trim() + " (skipped)");
+            }
+        }
+    
+        // Lyrics
+        ArrayList<String> lyrics = new ArrayList<>();
+        System.out.println("Enter lyrics line by line (type 'END' to finish):");
+        String line = "";
+        while (!line.equalsIgnoreCase("END")) {
+            line = scanner.nextLine();
+            if (!line.equalsIgnoreCase("END")) {
+                lyrics.add(line);
+            }
+        }
+
+    
+        // Music notes
+        ArrayList<String> musicNotes = new ArrayList<>();
+        System.out.println("Enter music notes line by line (type 'END' to finish):");
+        line = "";
+        while (!line.equalsIgnoreCase("END")) {
+            line = scanner.nextLine();
+            if (!line.equalsIgnoreCase("END")) {
+                musicNotes.add(line);
+            }
+        }
+
+    
+        // Duration
+        System.out.print("Duration in seconds: ");
+        int duration = Integer.parseInt(scanner.nextLine());
+    
+        // Create music
+        System.out.println("Select music type:");
+        System.out.println("1. Normal Music");
+        System.out.println("2. Explicit Music");
+        System.out.println("3. Media Music");
+        System.out.print("Option: ");
+        int typeOption = Integer.parseInt(scanner.nextLine());
+
+        Music music;
+        switch (typeOption) {
+            case 1:
+                music = new NormalMusic(name, interpreter, recordLabel, genres, lyrics, musicNotes, duration);
+                break;
+            case 2:
+                music = new ExplicitMusic(name, interpreter, recordLabel, genres, lyrics, musicNotes, duration);
+                break;
+            case 3:
+                System.out.print("Enter media video ID (integer): ");
+                int videoId = Integer.parseInt(scanner.nextLine());
+                music = new MediaMusic(name, interpreter, recordLabel, genres, lyrics, musicNotes, duration, videoId);
+                break;
+            default:
+                System.out.println("Invalid option, defaulting to Normal Music.");
+                music = new NormalMusic(name, interpreter, recordLabel, genres, lyrics, musicNotes, duration);
+        }
+
+            
+        return music;
+    }
+    
 }
