@@ -121,8 +121,17 @@ public abstract class Music implements Serializable{
         sb.append("Interpreter: ").append(this.interpreter).append('\n');
         sb.append("Record Label: ").append(this.record_label).append('\n');
         sb.append("Genres: ").append(this.genres).append('\n');
-        sb.append("Lyrics:  ").append(this.lyrics).append('\n');
-        sb.append("Music: ").append(this.music).append('\n');
+
+        sb.append("Lyrics:\n\"\n");
+        for (String line : this.lyrics) {
+            sb.append(line).append('\n');
+        }
+        sb.append("\"\nMusic: \n\"\n");
+        for (String line : this.music) {
+            sb.append(line).append('\n');
+        }
+        sb.append("\"\n");
+
         sb.append("Duration: ").append(this.duration).append('\n');
         sb.append("Streams: ").append(this.streams).append('\n');
         return sb.toString();

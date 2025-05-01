@@ -78,24 +78,42 @@ public class Main {
         while (true) {
                 System.out.println("\nChoose an option:");
                 System.out.println("1. Library");
-                System.out.println("2. Search for a Song");
-                System.out.println("3. My Points");
+                System.out.println("2. Show all Music Names");
+                System.out.println("3. Search a Music");
+                System.out.println("4. Show all Albums");
+                System.out.println("5. Play an Album");
+                System.out.println("9. My Points");
                 System.out.println("0. Exit");
                 System.out.print("Option: ");
                 String input = scanner.nextLine();
 
                 switch (input) {
                     case "2":
-                        System.out.print("Enter music to stream (or 'exit'): ");
+                        System.out.print("Showing all the Music Names:\n" + spotifUM.getMusicNames().toString());
+                        break;
+                    case "3":
+                        System.out.print("Enter music to search (or 'exit'): ");
                         // print top 5 songs as recommendation?
                         String musicString = scanner.nextLine();
                         if (musicString.equalsIgnoreCase("exit")) break;
                         Music music = spotifUM.getMusic(musicString);
                         if (music == null) {System.out.print("Music not found"); continue;}
-                        user.play(music);
-                        System.out.println("Streamed: " + music);
+                        musicMode(scanner, user, music);
                         break;
-                    case "3":
+                    case "4":
+                        System.out.print("Showing all the Album Names:\n" + spotifUM.getAlbumNames().toString());
+                        break;
+                    case "5":
+                        System.out.print("Enter Album to play (or 'exit'): ");
+                        // print top 5 songs as recommendation?
+                        String albumString = scanner.nextLine();
+                        if (albumString.equalsIgnoreCase("exit")) break;
+                        Album album = spotifUM.getAlbum(albumString);
+                        if (album == null) {System.out.print("Album not found"); continue;}
+                        System.out.println("Playing: " + albumString);
+                        albumMode(scanner, user, album);
+                        break;
+                    case "9":
                         System.out.println("Your total Points: " + user.getPoints());
                         break;
                     case "0":
@@ -136,6 +154,56 @@ public class Main {
         User user = new User(handle, name, email, address, plan);
         user.setPlan(plan); // apply join bonus
         return user;
+    }
+
+
+    private static void musicMode(Scanner scanner, User user, Music music) {
+        while (true) {
+            System.out.println("\n" + music.getName());
+            System.out.println("Music options:");
+            System.out.println("1. Play");
+            System.out.println("2. Show Music info"); // random, comecar por onde e poder skipar ou n
+            System.out.println("3. ");
+            System.out.println("4. ");
+            System.out.println("5. Add to a playlist"); // preciso de por esta opcao if para cada plano 
+            System.out.println("6. Like");
+            System.out.println("0. Exit");
+            System.out.print("Option: ");
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    user.play(music);
+                    System.out.println("Played: " + music);
+                    break;
+
+                case "2":
+                    System.out.println("Music's info: \n" + music.toString());
+                    break;
+
+                case "0":
+                    System.out.println("Exiting.");
+                    return;
+            
+                default:
+                    break;
+            }
+        }
+    }
+
+    private static void albumMode(Scanner scanner, User user, Album album) {
+        while (true) {
+            System.out.println("\n" + album.getName());
+            System.out.println("\nAlbum options:");
+            System.out.println("1. Show musics");
+            System.out.println("2. Play"); // random, comecar por onde e poder skipar ou n
+            System.out.println("3. Add to Library");
+            System.out.println("4. ");
+            System.out.println("0. Exit.");
+            System.out.print("Option: ");
+            String choice = scanner.nextLine();
+
+        }
     }
 
     // ========== ADMIN MODE ==========
@@ -272,4 +340,14 @@ public class Main {
         return music;
     }
     
+    private static Album addAlbum(Scanner scanner) {
+        System.out.print("Album name: ");
+        String name = scanner.nextLine();
+    
+        System.out.print("Interpreter (artist name): ");
+        String interpreter = scanner.nextLine();
+
+        Album album = new Album(name, null, null);
+        return album;
+    }
 }

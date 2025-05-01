@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+
+// falta playlists
 public class SpotifUM implements Serializable {
     private Map<String, User> users;
     private Map<String, Music> musics;
@@ -62,6 +64,10 @@ public class SpotifUM implements Serializable {
     }
     public Set<String> getMusicNames() {
         return musics.keySet();
+    }
+
+    public Set<String> getAlbumNames() {
+        return albums.keySet();
     }
     
     public Album getAlbum(String album) {
