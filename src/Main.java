@@ -184,9 +184,16 @@ public class Main {
     private static Music addMusic(Scanner scanner) {
         System.out.print("Music name: ");
         String name = scanner.nextLine();
-    
-        System.out.print("Interpreter (artist name): ");
-        String interpreter = scanner.nextLine();
+        //interpreter
+        ArrayList<String> interpreter = new ArrayList<>();
+        System.out.println("Enter the interpreters (music artists) line by line (type 'END' to finish):");
+        String line = "";
+        while (!line.equalsIgnoreCase("END")) {
+            line = scanner.nextLine();
+            if (!line.equalsIgnoreCase("END")) {
+                interpreter.add(line);
+            }
+        }
     
         System.out.print("Record label: ");
         String recordLabel = scanner.nextLine();
@@ -210,7 +217,7 @@ public class Main {
         // Lyrics
         ArrayList<String> lyrics = new ArrayList<>();
         System.out.println("Enter lyrics line by line (type 'END' to finish):");
-        String line = "";
+         line = "";
         while (!line.equalsIgnoreCase("END")) {
             line = scanner.nextLine();
             if (!line.equalsIgnoreCase("END")) {

@@ -35,11 +35,7 @@ public class ExplicitMusic extends Music {
         super(name, interpreter, record_label, genres, lyrics, music, duration);
 
     }
-    public ExplicitMusic(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
-            ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
-        super(name, interpreter, record_label, genres, lyrics, music, duration, streams);
-
-    }
+    
 
     /**
      * Constructs a new Music with a pre constructed Music.
