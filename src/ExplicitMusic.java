@@ -30,12 +30,12 @@ public class ExplicitMusic extends Music {
      * 
      */
 
-    public ExplicitMusic(String name, String interpreter, String record_label, HashSet<Genre> genres,
+    public ExplicitMusic(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration) {
         super(name, interpreter, record_label, genres, lyrics, music, duration);
 
     }
-    public ExplicitMusic(String name, String interpreter, String record_label, HashSet<Genre> genres,
+    public ExplicitMusic(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         super(name, interpreter, record_label, genres, lyrics, music, duration, streams);
 

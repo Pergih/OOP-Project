@@ -9,9 +9,9 @@ import java.util.Objects;
  * music, duration and streams .
  */
 public abstract class Music implements Serializable{
-    private String name, interpreter, record_label;
+    private String name, record_label;
     private HashSet<Genre> genres;
-    private ArrayList<String> lyrics, music;
+    private ArrayList<String> lyrics, music,interpreter;
     private int duration, streams;
 
     /**
@@ -25,7 +25,7 @@ public abstract class Music implements Serializable{
         music = new ArrayList<>();
         genres = new HashSet<>();
         name = new String();
-        interpreter = new String();
+        interpreter = new ArrayList<>();
         record_label = new String();
         duration = 0;
         streams = 0;
@@ -46,7 +46,7 @@ public abstract class Music implements Serializable{
      */
 
 
-     public Music(String name, String interpreter, String record_label, HashSet<Genre> genres,
+     public Music(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
                   ArrayList<String> lyrics, ArrayList<String> music, int duration) {
         this.name = name;
         this.interpreter = interpreter;
@@ -58,7 +58,7 @@ public abstract class Music implements Serializable{
         this.streams = 0;
     }
 
-    public Music(String name, String interpreter, String record_label, HashSet<Genre> genres,
+    public Music(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         this.name = name;
         this.interpreter = interpreter;
@@ -136,7 +136,6 @@ public abstract class Music implements Serializable{
     public int hashCode() {
         int hash = 12;
         hash = 37 * hash + this.name.hashCode();
-        hash = 37 * hash + this.interpreter.hashCode();
         hash = 37 * hash + this.name.hashCode();
         hash = 37 * hash + this.duration;
         hash = 37 * hash + this.record_label.hashCode();
@@ -167,8 +166,8 @@ public abstract class Music implements Serializable{
      *
      * @return interpreter
      */
-    public String getInterpreter() {
-        return interpreter;
+    public ArrayList<String> getInterpreter() {
+        return new ArrayList<>(interpreter);
     }
 
     /**
@@ -176,8 +175,8 @@ public abstract class Music implements Serializable{
      *
      * @param interpreter the stirng of interpreter to set
      */
-    public void setInterpreter(String interpreter) {
-        this.interpreter = interpreter;
+    public void setInterpreter(ArrayList<String> interpreter) {
+        this.interpreter = new ArrayList<>(interpreter);
     }
 
     /**
