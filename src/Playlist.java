@@ -3,20 +3,20 @@ import java.util.ArrayList;
 
 public class Playlist implements MusicCollection, Serializable {
 
-    //algum burro fez isto não abstract mas isso é para depois
-
-    
-    private String name;
-    private ArrayList<Music> musicList;
+    protected User creator;
+    protected String name;
+    protected ArrayList<Music> musicList;
 
     public Playlist() {
+        creator = new User();
         musicList = new ArrayList<>();
         name = new String();
     }
 
-    public Playlist(String name, ArrayList<Music> musicList) {
+    public Playlist(String name, ArrayList<Music> musicList, User creator) {
         this.musicList = new ArrayList<>(musicList);
         this.name = name;
+        this.creator = creator;
     }
     //getters
 
@@ -36,6 +36,10 @@ public class Playlist implements MusicCollection, Serializable {
         return totalDuration;
     }
 
+    public User getCreator() {
+        return creator;
+    }
+
     public String getName() {
         return name;
     }
@@ -51,6 +55,10 @@ public class Playlist implements MusicCollection, Serializable {
     //setters
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
     
     public void setMusicList(ArrayList<Music> musicList) {

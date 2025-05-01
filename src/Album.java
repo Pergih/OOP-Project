@@ -1,19 +1,19 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 
 public class Album implements MusicCollection, Serializable {
     private String name;
-    private HashSet<String> authors;
+    private ArrayList<String> authors;
     private ArrayList<Music> musicList;
 
     public Album() {
         musicList = new ArrayList<>();
         name = new String();
-        authors = new HashSet<>();
+        authors = new ArrayList<>();
     }
 
-    public Album(String name, ArrayList<Music> musicList, HashSet<String> authors) {
+    public Album(String name, ArrayList<Music> musicList, ArrayList<String> authors) {
         this.musicList = new ArrayList<>(musicList);
         this.musicList = musicList;
         this.authors = authors;
@@ -49,7 +49,7 @@ public class Album implements MusicCollection, Serializable {
             return musicList.get(index);
     }
 
-    public HashSet<String> getAuthors() {
+    public ArrayList<String> getAuthors() {
         return authors;
     }
     //setters
@@ -72,7 +72,7 @@ public class Album implements MusicCollection, Serializable {
         this.musicList = musicList;
     }
 
-    public void setAuthors(HashSet<String> authors) {
+    public void setAuthors(ArrayList<String> authors) {
         this.authors = authors;
     }
 
