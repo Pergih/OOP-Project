@@ -1,8 +1,17 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
-
+/**
+ * Represents a MusicFactory  that has methods to create a music
+ */
 public class MusicFactory {
+    /**
+     * Creates a music.
+     * 
+     * @param scanner for the inputs.
+     * 
+     
+     */
     public static Music create(Scanner scanner) {
         
         System.out.print("Music name: ");

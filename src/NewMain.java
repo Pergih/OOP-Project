@@ -1,5 +1,7 @@
 import java.util.Scanner;
-
+/**
+ * Represents Main with a scanner and SpotifUm 
+ */
 public class NewMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

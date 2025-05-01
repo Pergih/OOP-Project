@@ -1,6 +1,16 @@
 import java.util.Scanner;
-
+// ========== REGISTER USER ==========
+/**
+ * Represents a UserFactory that has methods to create a user
+ */
 public class UserFactory {
+    /**
+     * Creates a user
+     * 
+     * @param scanner for the inputs.
+     * 
+     
+     */
     public static User create (Scanner scanner) {
         System.out.print("Handle: ");
         String handle = scanner.nextLine();

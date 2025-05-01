@@ -7,7 +7,7 @@ SRC = src
 BIN = bin
 OUTPUT_FILE = saves/output.txt
 INPUT_FILE = saves/scripts.txt
-
+DOCS = documentation
 # Ficheiros
 SOURCES = $(wildcard $(SRC)/*.java)
 CLASSES = $(patsubst $(SRC)/%.java,$(BIN)/%.class,$(SOURCES))
@@ -45,3 +45,14 @@ clean:
 
 # Phony
 .PHONY: all run clean script scriptAux
+
+# Gerar Javadoc
+javadoc:
+	@echo "Generating Javadoc documentation..."
+	@mkdir -p $(DOCS)
+	@javadoc -d $(DOCS) -cp $(BIN) $(SOURCES)
+	@echo "Javadoc generated in $(DOCS)/"
+
+# Limpar documentação Javadoc
+clean-javadoc:
+	rm -rf documentation/*
