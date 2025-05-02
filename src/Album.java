@@ -15,8 +15,8 @@ public class Album implements MusicCollection, Serializable {
 
     public Album(String name, ArrayList<Music> musicList, ArrayList<String> authors) {
         this.musicList = new ArrayList<>(musicList);
-        this.musicList = musicList;
-        this.authors = authors;
+        this.name = name;
+        this.authors = new ArrayList<>(authors);
     }
 
     //getters
