@@ -210,10 +210,9 @@ public class MenuHandler {
                     break;
 
                 case "2":
-                    System.out.print("Enter album name: ");
-                    String album = scanner.nextLine();
-                    // Add album logic here
-                    System.out.println("Album added: " + album);
+                    Album newAlbum = AlbumFactory.create(scanner,spotifUM);
+                    spotifUM.addAlbum(newAlbum);            
+                    System.out.println("Album added: " + newAlbum.getName());
                     break;
 
                 case "4":
