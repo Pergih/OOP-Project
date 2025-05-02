@@ -17,7 +17,7 @@ public class MusicFactory {
         System.out.print("Music name: ");
         String name = scanner.nextLine();
         //interpreter
-        ArrayList<String> interpreter = new ArrayList<>();
+        HashSet<String> interpreter = new HashSet<>();
         System.out.println("Enter the interpreters (music artists) line by line (type 'END' to finish):");
         String line = "";
         while (!line.equalsIgnoreCase("END")) {

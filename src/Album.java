@@ -1,22 +1,23 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class Album implements MusicCollection, Serializable {
     private String name;
-    private ArrayList<String> authors;
+    private HashSet<String> authors;
     private ArrayList<Music> musicList;
 
     public Album() {
         musicList = new ArrayList<>();
         name = new String();
-        authors = new ArrayList<>();
+        authors = new HashSet<>();
     }
 
-    public Album(String name, ArrayList<Music> musicList, ArrayList<String> authors) {
+    public Album(String name, ArrayList<Music> musicList, HashSet<String> authors) {
         this.musicList = new ArrayList<>(musicList);
         this.name = name;
-        this.authors = new ArrayList<>(authors);
+        this.authors = new HashSet<>(authors);
     }
 
     //getters
@@ -49,8 +50,8 @@ public class Album implements MusicCollection, Serializable {
             return musicList.get(index);
     }
 
-    public ArrayList<String> getAuthors() {
-        return authors;
+    public HashSet<String> getAuthors() {
+        return new HashSet<>(authors);
     }
     //setters
 
@@ -72,8 +73,8 @@ public class Album implements MusicCollection, Serializable {
         this.musicList = musicList;
     }
 
-    public void setAuthors(ArrayList<String> authors) {
-        this.authors = authors;
+    public void setAuthors(HashSet<String> authors) {
+        this.authors = new HashSet<>(authors);
     }
 
     //ops
@@ -104,5 +105,12 @@ public class Album implements MusicCollection, Serializable {
             result.append(music.toString()).append("\n");
         }
         return result.toString();
+    }
+    
+    public int hashCode() {
+        int hash = 12;
+        hash = 37 * hash + this.name.hashCode();
+       
+        return hash;
     }
 }

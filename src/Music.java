@@ -11,7 +11,8 @@ import java.util.Objects;
 public abstract class Music implements Serializable{
     private String name, record_label;
     private HashSet<Genre> genres;
-    private ArrayList<String> lyrics, music,interpreter;
+    private HashSet<String> interpreter;
+    private ArrayList<String> lyrics, music;
     private int duration, streams;
 
     /**
@@ -25,7 +26,7 @@ public abstract class Music implements Serializable{
         music = new ArrayList<>();
         genres = new HashSet<>();
         name = new String();
-        interpreter = new ArrayList<>();
+        interpreter = new HashSet<>();
         record_label = new String();
         duration = 0;
         streams = 0;
@@ -46,7 +47,7 @@ public abstract class Music implements Serializable{
      */
 
 
-     public Music(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
+     public Music(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
                   ArrayList<String> lyrics, ArrayList<String> music, int duration) {
         this.name = name;
         this.interpreter = interpreter;
@@ -58,7 +59,7 @@ public abstract class Music implements Serializable{
         this.streams = 0;
     }
 
-    public Music(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
+    public Music(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         this.name = name;
         this.interpreter = interpreter;
@@ -138,13 +139,12 @@ public abstract class Music implements Serializable{
     }
 
     /**
-     * Gives the hashcode for a music
+     * Gives the hashcode for the genres and interpreters
      * 
      * @return int
      */
     public int hashCode() {
         int hash = 12;
-        hash = 37 * hash + this.name.hashCode();
         hash = 37 * hash + this.name.hashCode();
         hash = 37 * hash + this.duration;
         hash = 37 * hash + this.record_label.hashCode();
@@ -175,8 +175,8 @@ public abstract class Music implements Serializable{
      *
      * @return interpreter
      */
-    public ArrayList<String> getInterpreter() {
-        return new ArrayList<>(interpreter);
+    public HashSet<String> getInterpreter() {
+        return new HashSet<>(interpreter);
     }
 
     /**
@@ -184,8 +184,8 @@ public abstract class Music implements Serializable{
      *
      * @param interpreter the stirng of interpreter to set
      */
-    public void setInterpreter(ArrayList<String> interpreter) {
-        this.interpreter = new ArrayList<>(interpreter);
+    public void setInterpreter(HashSet<String> interpreter) {
+        this.interpreter = new HashSet<>(interpreter);;
     }
 
     /**

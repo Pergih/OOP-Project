@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 /**
  * Represents a Album Factory  that has methods to create a album
@@ -21,6 +22,7 @@ public class AlbumFactory {
         System.out.println( "Songs you can choose"+ spotifUM.getMusicNames().toString());
         System.out.println("Enter the Songs' names  line by line (type 'END' to finish):");
         String line = "";
+        HashSet<String> authors = new HashSet<>();
         while (!line.equalsIgnoreCase("END")) {
             line = scanner.nextLine();
             if (!line.equalsIgnoreCase("END")) {
@@ -28,11 +30,15 @@ public class AlbumFactory {
                 if (music == null) {System.out.print("Music not found"); continue;}
 
                 songs.add(music);
+                for(String aut : music.getInterpreter()){
+                    authors.add(aut);
+                }
+
 
             }
         }
-        ArrayList<String> authors = new ArrayList<>();
-        authors.add("ADMIN");
+        
+        
         Album album;
         album = new Album(name, songs, authors);
 

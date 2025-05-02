@@ -30,12 +30,12 @@ public class NormalMusic extends Music {
      * @param streams
      * 
      */
-    public NormalMusic(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
+    public NormalMusic(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration) {
         super(name, interpreter, record_label, genres, lyrics, music, duration);
 
     }
-    public NormalMusic(String name, ArrayList<String> interpreter, String record_label, HashSet<Genre> genres,
+    public NormalMusic(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         super(name, interpreter, record_label, genres, lyrics, music, duration, streams);
 
