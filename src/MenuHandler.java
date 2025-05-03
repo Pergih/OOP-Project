@@ -105,7 +105,7 @@ public class MenuHandler {
                         if (musicString.equalsIgnoreCase("exit")) break;
                         Music music = spotifUM.getMusic(musicString);
                         if (music == null) {System.out.print("Music not found"); continue;}
-                        musicMode(user, music);
+                        showMusicMenu(user, music);
                         break;
                     case "4":
                         System.out.print("Showing all the Album Names:\n" + spotifUM.getAlbumNames().toString());
@@ -118,7 +118,7 @@ public class MenuHandler {
                         Album album = spotifUM.getAlbum(albumString);
                         if (album == null) {System.out.print("Album not found"); continue;}
                         System.out.println("Playing: " + albumString);
-                        albumMode(user, album);
+                        showAlbumMenu(user, album);
                         break;
                     case "9":
                         System.out.println("Your total Points: " + user.getPoints());
@@ -129,16 +129,38 @@ public class MenuHandler {
         }
     }
 
-    public void musicMode(User user, Music music) {
+    public void libraryMenu(User user) {
+        while (true) {
+            System.out.println("Library options:");
+            System.out.println("1. Show your Library");
+            System.out.println("2. Play");
+            System.out.println("0. Exit");
+            System.out.print("Option: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    System.out.println("Your Library: \n" + user.libraryToString());
+                    break;
+                case "2":
+                System.out.println("Choose: ");
+                break;
+                case "0":
+                    System.out.println("Exiting.");
+                    return;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void showMusicMenu(User user, Music music) {
         while (true) {
             System.out.println("\n" + music.getName());
             System.out.println("Music options:");
             System.out.println("1. Play");
             System.out.println("2. Show Music info"); // random, comecar por onde e poder skipar ou n
-            System.out.println("3. ");
-            System.out.println("4. ");
-            System.out.println("5. Add to a playlist"); // preciso de por esta opcao if para cada plano 
-            System.out.println("6. Like");
+            if(user.getPlan().allows(Playlist.class)) System.out.println("3. Add to a playlist"); // preciso de por esta opcao if para cada plano 
+            if(user.getPlan().allows(Favorites.class)) System.out.println("4. Like");
             System.out.println("0. Exit");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
@@ -166,7 +188,7 @@ public class MenuHandler {
 
 
     
-    public void albumMode(User user, Album album) {
+    public void showAlbumMenu(User user, Album album) {
         while (true) {
             System.out.println("\n" + album.getName());
             System.out.println("\nAlbum options:");

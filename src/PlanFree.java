@@ -7,8 +7,8 @@ public class PlanFree extends Plan {
         return 5;
     }
 
-    public boolean allows(MusicCollection p) {
-        return true;
-        // return !(p instanceof Favorites || p instanceof PrivatePlaylist);
+    public boolean allows(Class<? extends MusicCollection> collectionType) {
+        return !(collectionType == Favorites.class || collectionType == PrivatePlaylist.class);
     }
+    
 }

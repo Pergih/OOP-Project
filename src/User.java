@@ -156,6 +156,16 @@ public class User implements Serializable{
                 '}';
     }
 
+    public String libraryToString() {
+        StringBuilder sb = new StringBuilder();
+        for (MusicCollection mc : library) {
+            String type = mc.getClass().getSimpleName(); // Gets "Album", "PublicPlaylist", etc.
+            sb.append("[").append(type).append("] ").append(mc.getName()).append("\n");
+        }
+        return sb.toString();
+    }
+    
+
     /**
      * Metodos
      */
@@ -163,7 +173,7 @@ public class User implements Serializable{
 
     // example for now
     public void addPlaylist(MusicCollection playlist) {
-        if (plan.allows(playlist)) {
+        if (plan.allows(playlist.getClass())) {
             library.add(playlist);
         } else {
             // maybe its not SecurityException we have other ones
