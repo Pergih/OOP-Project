@@ -38,11 +38,11 @@ public class User implements Serializable{
     }
 
     public User(User other) {
-        this.handle = other.handle;
-        this.name = other.name;
-        this.email = other.email;
-        this.address = other.address;
-        this.plan = other.plan; // shallow copy (assumes Plan is immutable or safely shared)
+        this.handle = other.getHandle();
+        this.name = other.getName();
+        this.email = other.getEmail();
+        this.address = other.getAddress();
+        this.plan = other.getPlan(); // shallow copy (assumes Plan is immutable or safely shared)
         this.library = new ArrayList<>(other.library); // same as above
         this.history = new ArrayList<>(other.history);
         this.points = other.points;

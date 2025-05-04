@@ -7,7 +7,7 @@ public class PlanTopPremium extends Plan {
         return (int)(user.getPoints() * 0.025);
     }
 
-    public boolean allows(MusicCollection p) {
+    public boolean allows(Class<? extends MusicCollection> collectionType) {
         return true;
     }
 }

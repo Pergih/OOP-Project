@@ -54,7 +54,7 @@ public class MenuHandler {
                     break;
 
                 case "3":
-                    showAdminMenu();
+                    showAdminMenu(spotifUM.getUser("admin"));
                     break;
 
                 case "0":
@@ -210,15 +210,16 @@ public class MenuHandler {
      * Displays the Admin menu of the SpotifUM application.
      * Handles the creation of musics album playlists etc.
      */
-    public void showAdminMenu() {
+    public void showAdminMenu(User adminUser) {
         /* menu do admin */
         System.out.println("\nAdmin mode activated.");
         while (true) {
             System.out.println("\nAdmin options:");
             System.out.println("1. Add music");
             System.out.println("2. Add album");
-            System.out.println("3. Add playlist");
+            System.out.println("3. Add random playlist");
             System.out.println("4. Show musics");
+            System.out.println("5. Show random playlists");
 
             System.out.println("0. Exit admin");
             System.out.print("Option: ");
@@ -228,7 +229,7 @@ public class MenuHandler {
                 case "1":
                     Music newMusic = MusicFactory.create(scanner);
                     spotifUM.addMusic(newMusic);
-                    System.out.println("Música criada: " + newMusic.getName());
+                    System.out.println("Music added: " + newMusic.getName());
                     break;
 
                 case "2":
@@ -236,9 +237,18 @@ public class MenuHandler {
                     spotifUM.addAlbum(newAlbum);            
                     System.out.println("Album added: " + newAlbum.getName());
                     break;
+                case "3":
+                    RandomPlaylist newRandomPlaylist = RandomPlaylistFactory.create(scanner, spotifUM, adminUser);
+                    spotifUM.addRandomPlaylist(newRandomPlaylist);            
+                    System.out.println("Random Playlist added: " + newRandomPlaylist.getName());
+                    break;
 
                 case "4":
-                    System.out.print("Showing all the Musics:\n" + spotifUM.getMusics().toString());
+                    System.out.print("Showing all the Musics:\n" + spotifUM.getMusics().values().toString());
+                    break;
+
+                case "5":
+                    System.out.print("Showing all the Random Playlists:\n" + spotifUM.getRandomPlaylists().values().toString());
                     break;
 
                 case "0":

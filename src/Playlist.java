@@ -18,6 +18,35 @@ public class Playlist implements MusicCollection, Serializable {
         this.name = name;
         this.creator = creator;
     }
+
+    // toString
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== Playlist ===\n");
+        sb.append("Name: ").append(name).append('\n');
+        sb.append("Creator: ").append(creator != null ? creator.getHandle() : "Unknown").append('\n');
+        sb.append("Total Duration: ").append(getDuration()).append(" seconds\n");
+        sb.append("Total Streams: ").append(getStreams()).append('\n');
+        sb.append("Music List:\n");
+
+        if (musicList.isEmpty()) {
+            sb.append("  (No music in this playlist)\n");
+        } else {
+            for (int i = 0; i < musicList.size(); i++) {
+                Music music = musicList.get(i);
+                sb.append("  ").append(i + 1).append(". ").append(music.getName())
+                .append(" by ").append(music.getInterpreter())
+                .append(" (").append(music.getDuration()).append("s, ")
+                .append(music.getStreams()).append(" streams)\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
+
     //getters
 
     public int getStreams() {

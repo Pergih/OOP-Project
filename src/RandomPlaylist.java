@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RandomPlaylist extends Playlist {
@@ -8,27 +9,15 @@ public class RandomPlaylist extends Playlist {
         addRandomMusic(spotifUM, n);
     }
 
-    public void addRandomMusic(SpotifUM spotifUM) {
+    private void addRandomMusic(SpotifUM spotifUM, int n) {
         List<Music> musicPool = new ArrayList<>(spotifUM.getMusics().values());
-        if (musicPool.isEmpty())
-            return;
+        if (musicPool.isEmpty()) return;
 
-        int randomIndex = (int) (Math.random() * musicPool.size());
-        Music randomMusic = musicPool.get(randomIndex);
+        Collections.shuffle(musicPool); // Shuffle to get randomness
+        int count = Math.min(n, musicPool.size());
 
-        musicList.add(randomMusic);
-    }
-
-    public void addRandomMusic(SpotifUM spotifUM, int n) {
-        List<Music> musicPool = new ArrayList<>(spotifUM.getMusics().values());
-        if (musicPool.isEmpty())
-            return;
-
-        for (int i = 0; i < n; i++) {
-            int randomIndex = (int) (Math.random() * musicPool.size());
-            Music randomMusic = musicPool.get(randomIndex);
-            musicList.add(randomMusic);
+        for (int i = 0; i < count; i++) {
+            musicList.add(musicPool.get(i));
         }
     }
-
 }

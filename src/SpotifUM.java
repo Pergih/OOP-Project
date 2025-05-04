@@ -7,11 +7,13 @@ public class SpotifUM implements Serializable {
     private Map<String, User> users;
     private Map<String, Music> musics;
     private Map<String, Album> albums;
+    private Map<String, RandomPlaylist> randomPlaylists;
 
     public SpotifUM() {
         users = new HashMap<String, User>();
         musics = new HashMap<String, Music>();
         albums = new HashMap<String, Album>();
+        randomPlaylists = new HashMap<>();
     }
 
     // Getters
@@ -27,11 +29,14 @@ public class SpotifUM implements Serializable {
         return albums;
     }
 
+    public Map<String, RandomPlaylist> getRandomPlaylists() {
+        return randomPlaylists;
+    }
+
     // Add methods
     public void addUser(User user) {
         users.put(user.getHandle(), user);
     }
-    
 
     public void addMusic(Music music) {
         musics.put(music.getName(), music);
@@ -39,6 +44,10 @@ public class SpotifUM implements Serializable {
 
     public void addAlbum(Album album) {
         albums.put(album.getName(), album);
+    }
+    
+    public void addRandomPlaylist(RandomPlaylist RandomPlaylist) {
+        randomPlaylists.put(RandomPlaylist.getName(), RandomPlaylist);
     }
 
     // Save data to file
@@ -69,6 +78,10 @@ public class SpotifUM implements Serializable {
     public Set<String> getAlbumNames() {
         return albums.keySet();
     }
+
+    public Set<String> getRandomPlaylistNames() {
+        return randomPlaylists.keySet();
+    }
     
     public Album getAlbum(String album) {
         return albums.get(album);
@@ -80,5 +93,9 @@ public class SpotifUM implements Serializable {
 
     public Collection<User> getAllUsers() {
         return users.values();
+    }
+    public RandomPlaylist getRandomPlaylist(String randomPlaylistString) {
+        return randomPlaylists.get(randomPlaylistString);
+
     }
 }
