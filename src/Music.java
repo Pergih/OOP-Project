@@ -113,8 +113,8 @@ public abstract class Music implements Serializable{
     /**
      * Convert the music in a String
      * 
-     * @param object
-     * @return Bool
+     
+     * @return String
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -135,6 +135,13 @@ public abstract class Music implements Serializable{
 
         sb.append("Duration: ").append(this.duration).append('\n');
         sb.append("Streams: ").append(this.streams).append('\n');
+        return sb.toString();
+    }
+    public String playLyricString(){
+        StringBuilder sb = new StringBuilder();
+        for (String line : this.lyrics) {
+            sb.append(line).append('\n');
+        }
         return sb.toString();
     }
 
@@ -300,5 +307,6 @@ public abstract class Music implements Serializable{
 
     public void playMusic(){
         this.streams+=1;
+        this.playLyricString();
     }
 }

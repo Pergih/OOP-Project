@@ -13,7 +13,7 @@ public class Main {
             spotifUM = new SpotifUM();
         }
         
-        PlanAdmin plan = new PlanAdmin();
+        Plan plan = new PlanAdmin();
         User adminUser = new User("admin", "Admin", "", "", plan);
         spotifUM.addUser(adminUser);
 

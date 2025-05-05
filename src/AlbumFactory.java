@@ -19,10 +19,11 @@ public class AlbumFactory {
         String name = scanner.nextLine();
         //musics that the admin  wants to add to the album
         ArrayList<Music> songs = new ArrayList<>();
+        HashSet<String> authors = new HashSet<>();
         System.out.println( "Songs you can choose"+ spotifUM.getMusicNames().toString());
         System.out.println("Enter the Songs' names  line by line (type 'END' to finish):");
         String line = "";
-        HashSet<String> authors = new HashSet<>();
+        
         while (!line.equalsIgnoreCase("END")) {
             line = scanner.nextLine();
             if (!line.equalsIgnoreCase("END")) {
