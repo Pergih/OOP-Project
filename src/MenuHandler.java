@@ -173,7 +173,7 @@ public class MenuHandler {
             switch (choice) {
                 case "1":
                     user.play(music);
-                    System.out.println("Played: " + music);
+                    // System.out.println("Played: " + music);
                     break;
 
                 case "2":
@@ -212,7 +212,7 @@ public class MenuHandler {
                 case "2":
                     System.out.println("Playing album "+album.getName());
                     for(Music m : album.getMusicList()){
-                        m.playMusic();
+                        user.play(m);
                         System.out.println("Press enter to Play the next music (or 'exit'): ");
                         String n = scanner.nextLine();
                         if (n.equalsIgnoreCase("exit")) break;
@@ -310,7 +310,7 @@ public class MenuHandler {
                 switch (choice) {
                     case "1":
                         user.play(music);
-                        System.out.println("Played: " + music.getName());
+                        // System.out.println("Played: " + music.getName());
                         waitingForPlay = false; // proceed to next music
                         break;
         

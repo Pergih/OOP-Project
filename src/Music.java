@@ -137,12 +137,12 @@ public abstract class Music implements Serializable{
         sb.append("Streams: ").append(this.streams).append('\n');
         return sb.toString();
     }
-    public String playLyricString(){
+    public void playLyricString(){
         StringBuilder sb = new StringBuilder();
         for (String line : this.lyrics) {
             sb.append(line).append('\n');
         }
-        return sb.toString();
+        System.out.println(sb.toString());
     }
 
     /**
