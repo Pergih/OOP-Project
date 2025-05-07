@@ -84,7 +84,14 @@ public class User implements Serializable{
     public int getPoints() {
         return points;
     }
-
+    public MusicCollection getFromLibrary(String wanted) {
+        for (MusicCollection mc : library) {
+            if (mc.getName().equalsIgnoreCase(wanted)) {
+                return mc;
+            }
+        }
+        return null; // não encontrado
+    }
     // Setters
 
     public void setHandle(String handle) {
@@ -227,4 +234,5 @@ public class User implements Serializable{
     public void addToLibrary(MusicCollection collection) {
         library.add(collection);
     }
+    
 }

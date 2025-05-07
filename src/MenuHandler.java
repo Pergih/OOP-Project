@@ -133,7 +133,7 @@ public class MenuHandler {
                     Album album = spotifUM.getAlbum(albumString);
                     if (album == null) {
                         System.out.println("Album not found");
-                        continue;
+                        break;
                     }
                     System.out.println("Playing: " + albumString);
                     showAlbumMenu(user, album);
@@ -157,6 +157,7 @@ public class MenuHandler {
             System.out.println("Library options:");
             System.out.println("1. Show your Library");
             System.out.println("2. Play");
+            System.out.println("3. Create a Playlist");
             System.out.println("0. Exit");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
@@ -166,8 +167,33 @@ public class MenuHandler {
                     break;
                 case "2":
                     
-                    System.out.println("Choose: ");
+                    
+                    System.out.println("Your Library: \n" + user.libraryToString());
+                    System.out.print("Enter the Playlist or Album to play (or 'exit'): ");
+                    String collectionString = scanner.nextLine();
+                    if (collectionString.equalsIgnoreCase("exit"))
+                        break;
+                    MusicCollection mc=user.getFromLibrary(collectionString);
+                    if(mc!=null){   
+                        if (mc instanceof Album){
+                            showPlayAlbumMenu(user,mc);
+                            break;
+                        }else if (mc instanceof Playlist) {
+                            
+                            break;
+                        }
+
+                    }else{
+                        System.out.println("Album or Playlist not found");
+                        break;
+                    }
+                    
+
                     break;
+                case "3":
+                    
+                    break;
+
                 case "0":
                     System.out.println("Exiting.");
                     return;
@@ -249,7 +275,7 @@ public class MenuHandler {
         }
     }
 
-    public void showPlayAlbumMenu(User user, Album album) {
+    public void showPlayAlbumMenu(User user, MusicCollection album) {
         int pos = 0;
 
         int last = (album.getMusicList().size())-1;
