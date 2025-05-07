@@ -155,7 +155,14 @@ public class User implements Serializable{
                 ", points=" + points +
                 '}';
     }
-
+    public String historyToString(){
+        StringBuilder sb = new StringBuilder();
+        for(int i=history.size()-1;i >= 0; i--){
+            sb.append(history.get(i)).append("\n");
+        }
+        
+        return sb.toString();
+    }
     public String libraryToString() {
         StringBuilder sb = new StringBuilder();
         for (MusicCollection mc : library) {
@@ -213,5 +220,11 @@ public class User implements Serializable{
             }
         }
         return names;
+    }
+    public Boolean canSkip(){
+        return true;
+    }
+    public void addToLibrary(MusicCollection collection) {
+        library.add(collection);
     }
 }

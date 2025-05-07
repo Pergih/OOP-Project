@@ -83,58 +83,76 @@ public class MenuHandler {
         /* menu do utilizador */
         System.out.println("\nWelcome " + user.getName() + "!");
         while (true) {
-                System.out.println("\nChoose an option:");
-                System.out.println("1. Play Random Playlists");
-                // por quase td com perms nos prints e nos cases
-                System.out.println("2. Library");
-                System.out.println("3. Show all Music Names");
-                System.out.println("4. Search a Music");
-                System.out.println("5. Show all Albums");
-                System.out.println("6. Play an Album");
-                System.out.println("9. My Points");
-                System.out.println("0. Exit");
-                System.out.print("Option: ");
-                String input = scanner.nextLine();
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Play Random Playlists");
+            // por quase td com perms nos prints e nos cases
+            System.out.println("2. Library");
+            System.out.println("3. Show all Music Names");
+            System.out.println("4. Search a Music");
+            System.out.println("5. Show all Albums");
+            System.out.println("6. Play an Album");
+            System.out.println("7. Show user's history");
+            System.out.println("9. My Points");
 
-                switch (input) {
-                    case "1":
-                        showChooseRandomPlaylistMenu(user);
+            System.out.println("0. Exit");
+            System.out.print("Option: ");
+            String input = scanner.nextLine();
+
+            switch (input) {
+                case "1":
+                    showChooseRandomPlaylistMenu(user);
+                    break;
+                case "2":
+                    showLibraryMenu(user);
+                    break;
+                case "3":
+                    System.out.println("Showing all the Music Names:\n" + spotifUM.getMusicNames().toString());
+                    break;
+                case "4":
+                    System.out.print("Enter music to search (or 'exit'): ");
+                    String musicString = scanner.nextLine();
+                    if (musicString.equalsIgnoreCase("exit"))
                         break;
-                    case "3":
-                        System.out.println("Showing all the Music Names:\n" + spotifUM.getMusicNames().toString());
+                    Music music = spotifUM.getMusic(musicString);
+                    if (music == null) {
+                        System.out.println("Music not found");
+                        continue;
+                    }
+                    showMusicMenu(user, music);
+                    break;
+                case "5":
+                    System.out.println("Showing all the Album Names:\n" + spotifUM.getAlbumNames().toString());
+                    break;
+                case "6":
+                    System.out.println("Showing available Albums: \n" + spotifUM.getAlbumNames().toString());
+                    System.out.print("Enter Album to play (or 'exit'): ");
+                    // print top 5 songs as recommendation?
+                    String albumString = scanner.nextLine();
+                    if (albumString.equalsIgnoreCase("exit"))
                         break;
-                    case "4":
-                        System.out.print("Enter music to search (or 'exit'): ");
-                        String musicString = scanner.nextLine();
-                        if (musicString.equalsIgnoreCase("exit")) break;
-                        Music music = spotifUM.getMusic(musicString);
-                        if (music == null) {System.out.println("Music not found"); continue;}
-                        showMusicMenu(user, music);
-                        break;
-                    case "5":
-                        System.out.println("Showing all the Album Names:\n" + spotifUM.getAlbumNames().toString());
-                        break;
-                    case "6":
-                        System.out.println("Showing available Albums: \n" + spotifUM.getAlbumNames().toString());
-                        System.out.print("Enter Album to play (or 'exit'): ");
-                        // print top 5 songs as recommendation?
-                        String albumString = scanner.nextLine();
-                        if (albumString.equalsIgnoreCase("exit")) break;
-                        Album album = spotifUM.getAlbum(albumString);
-                        if (album == null) {System.out.println("Album not found"); continue;}
-                        System.out.println("Playing: " + albumString);
-                        showAlbumMenu(user, album);
-                        break;
-                    case "9":
-                        System.out.println("Your total Points: " + user.getPoints());
-                        break;
-                    case "0":
-                        return;
+                    Album album = spotifUM.getAlbum(albumString);
+                    if (album == null) {
+                        System.out.println("Album not found");
+                        continue;
+                    }
+                    System.out.println("Playing: " + albumString);
+                    showAlbumMenu(user, album);
+                    break;
+                case "7":
+                    System.out.println(
+                            "Showing user's history from the oldest to the most recent: \n" + user.historyToString());
+                case "9":
+                    System.out.println("Your total Points: " + user.getPoints());
+                    break;
+                case "0":
+                    return;
             }
         }
     }
 
-    public void libraryMenu(User user) {
+    // ==========
+    // LIBRARYMENU=========================================================================================
+    public void showLibraryMenu(User user) {
         while (true) {
             System.out.println("Library options:");
             System.out.println("1. Show your Library");
@@ -147,8 +165,9 @@ public class MenuHandler {
                     System.out.println("Your Library: \n" + user.libraryToString());
                     break;
                 case "2":
-                System.out.println("Choose: ");
-                break;
+                    
+                    System.out.println("Choose: ");
+                    break;
                 case "0":
                     System.out.println("Exiting.");
                     return;
@@ -158,14 +177,18 @@ public class MenuHandler {
         }
     }
 
+    // ========== Music
+    // =========================================================================================
     public void showMusicMenu(User user, Music music) {
         while (true) {
             System.out.println("\n" + music.getName());
             System.out.println("Music options:");
             System.out.println("1. Play");
             System.out.println("2. Show Music info"); // random, comecar por onde e poder skipar ou n
-            if(user.getPlan().allows(Playlist.class)) System.out.println("3. Add to a playlist"); // preciso de por esta opcao if para cada plano 
-            if(user.getPlan().allows(Favorites.class)) System.out.println("4. Like");
+            if (user.getPlan().allows(Playlist.class))
+                System.out.println("3. Add to a playlist"); // preciso de por esta opcao if para cada plano
+            if (user.getPlan().allows(Favorites.class))
+                System.out.println("4. Like");
             System.out.println("0. Exit");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
@@ -183,46 +206,39 @@ public class MenuHandler {
                 case "0":
                     System.out.println("Exiting.");
                     return;
-            
+
                 default:
                     break;
             }
         }
     }
-    
 
+    // ========== ALBUM
+    // =========================================================================================
 
-    
     public void showAlbumMenu(User user, Album album) {
         while (true) {
-            
+
             System.out.println("Album options:");
             System.out.println("1. Show musics");
             System.out.println("2. Play"); // random, comecar por onde e poder skipar ou n
             System.out.println("3. Add to Library");
-            System.out.println("4. ");
             System.out.println("0. Exit.");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                    System.out.println("Showing all musics from the album "+album.getName()+":\n" + album.getMusicNames().toString());
+                    System.out.println("Showing all musics from the album " + album.getName() + ":\n"
+                            + album.getMusicNames().toString());
                     break;
 
                 case "2":
-                    System.out.println("Playing album "+album.getName());
-                    for(Music m : album.getMusicList()){
-                        user.play(m);
-                        System.out.println("Press enter to Play the next music (or 'exit'): ");
-                        String n = scanner.nextLine();
-                        if (n.equalsIgnoreCase("exit")) break;
 
-                    }
-                    
+                    showPlayAlbumMenu(user, album);
                     break;
                 case "3":
-                    System.out.println("Adding Album to the Library");
-                    System.out.println("Library not working please contact support");
+                    System.out.println("Album added to the Library");
+                    user.addToLibrary(album);
                     break;
                 case "0":
                     return;
@@ -233,7 +249,78 @@ public class MenuHandler {
         }
     }
 
+    public void showPlayAlbumMenu(User user, Album album) {
+        int pos = 0;
+
+        int last = (album.getMusicList().size())-1;
+        user.play(album.getMusic(pos));
+
+        while (true) {
+
+            System.out.println("What you want to do:");
+            System.out.println("1. Next Song");
+            System.out.println("2. Previous Song"); // random, comecar por onde e poder skipar ou n
+            System.out.println("0. Exit.");
+            System.out.print("Option: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    if (pos >= last) {
+                        System.out.println("Album finished. Want to play again?");
+                        System.out.println("1. Yes");
+                        System.out.println("0. Exit.");
+                        System.out.print("Option:");
+                        String choice2 = scanner.nextLine();
+                        switch (choice2) {
+                            case "1":
+                                pos = 0;
+                                user.play(album.getMusic(pos));
+
+                                break;
+                            case "0":
+                                return;
+                            default:
+                                System.out.println("Invalid option");
+                                break;
+                        }
+                        break;
+
+                    } else {
+                        pos += 1;
+                        user.play(album.getMusic(pos));
+
+                        break;
+
+                    }
+
+                case "2":
+                    if (user.canSkip()) {
+                        if (pos <= 0) {
+                            System.out.println("You're on the first song, there isn't a previous one.");
+                            break;
+                        }
+                        pos -= 1;
+                        user.play(album.getMusic(pos));
+
+                        break;
+                    }else{
+                        System.out.println("Your plan does not have access to this feature ");
+                        break;
+                    }
+                case "0":
+                    return;
+                default:
+                    break;
+            }
+
+        }
+
+    }
+
+    // ========== RANDOMPLAYLIST
+    // =========================================================================================
     public void showChooseRandomPlaylistMenu(User user) {
+
         while (true) {
             System.out.println("\nRandom Playlists options:");
             System.out.println("1. Show Random Playlists");
@@ -244,15 +331,20 @@ public class MenuHandler {
 
             switch (choice) {
                 case "1":
-                    System.out.print("Showing all the Random Playlists:\n" + spotifUM.getRandomPlaylistNames().toString());
+                    System.out.print(
+                            "Showing all the Random Playlists:\n" + spotifUM.getRandomPlaylistNames().toString());
                     break;
 
                 case "2":
                     System.out.print("Enter a playlist name to play (or 'exit'): ");
                     String randomPlaylistString = scanner.nextLine();
-                    if (randomPlaylistString.equalsIgnoreCase("exit")) break;
+                    if (randomPlaylistString.equalsIgnoreCase("exit"))
+                        break;
                     RandomPlaylist randomPlaylist = spotifUM.getRandomPlaylist(randomPlaylistString);
-                    if (randomPlaylist == null) {System.out.println("Random Playlist not found"); continue;}
+                    if (randomPlaylist == null) {
+                        System.out.println("Random Playlist not found");
+                        continue;
+                    }
                     showRandomPlaylistMenu(user, randomPlaylist);
                     break;
 
@@ -264,7 +356,7 @@ public class MenuHandler {
         }
 
     }
-    
+
     public void showRandomPlaylistMenu(User user, RandomPlaylist randomPlaylist) {
         while (true) {
             System.out.println("\n" + randomPlaylist.getName());
@@ -297,7 +389,7 @@ public class MenuHandler {
     public void showRandomPlayMenu(User user, RandomPlaylist randomPlaylist) {
         for (Music music : randomPlaylist.getMusicList()) {
             boolean waitingForPlay = true;
-        
+
             while (waitingForPlay) {
                 System.out.println("\n" + music.getName());
                 System.out.println("Play Music options:");
@@ -306,33 +398,33 @@ public class MenuHandler {
                 System.out.println("0. Exit");
                 System.out.print("Option: ");
                 String choice = scanner.nextLine();
-        
+
                 switch (choice) {
                     case "1":
                         user.play(music);
                         // System.out.println("Played: " + music.getName());
                         waitingForPlay = false; // proceed to next music
                         break;
-        
+
                     case "2":
                         System.out.println("Music's info:\n" + music.toString());
                         break;
-        
+
                     case "0":
                         return; // exits the whole loop
-        
+
                     default:
                         System.out.println("Invalid option.");
                         break;
                 }
             }
-        }        
+        }
         System.out.println("Exiting (No more musics to play)");
         return;
     }
 
-
-    // ========== ADMIN MODE ==========
+    // ========== ADMIN MODE
+    // =========================================================================================
     /**
      * Displays the Admin menu of the SpotifUM application.
      * Handles the creation of musics album playlists etc.
@@ -360,13 +452,13 @@ public class MenuHandler {
                     break;
 
                 case "2":
-                    Album newAlbum = AlbumFactory.create(scanner,spotifUM);
-                    spotifUM.addAlbum(newAlbum);            
+                    Album newAlbum = AlbumFactory.create(scanner, spotifUM);
+                    spotifUM.addAlbum(newAlbum);
                     System.out.println("Album added: " + newAlbum.getName());
                     break;
                 case "3":
                     RandomPlaylist newRandomPlaylist = RandomPlaylistFactory.create(scanner, spotifUM, adminUser);
-                    spotifUM.addRandomPlaylist(newRandomPlaylist);            
+                    spotifUM.addRandomPlaylist(newRandomPlaylist);
                     System.out.println("Random Playlist added: " + newRandomPlaylist.getName());
                     break;
 
@@ -375,7 +467,8 @@ public class MenuHandler {
                     break;
 
                 case "5":
-                    System.out.print("Showing all the Random Playlists:\n" + spotifUM.getRandomPlaylists().values().toString());
+                    System.out.print(
+                            "Showing all the Random Playlists:\n" + spotifUM.getRandomPlaylists().values().toString());
                     break;
 
                 case "0":
