@@ -1,10 +1,12 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.io.*;
 
-public class User implements Serializable{
+public class User implements Serializable {
     private String handle, name, email, address;
     private Plan plan;
     private ArrayList<MusicCollection> library;
@@ -52,11 +54,10 @@ public class User implements Serializable{
      * Getters e Setters
      */
 
-
     public String getHandle() {
         return handle;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -84,6 +85,7 @@ public class User implements Serializable{
     public int getPoints() {
         return points;
     }
+
     public MusicCollection getFromLibrary(String wanted) {
         for (MusicCollection mc : library) {
             if (mc.getName().equalsIgnoreCase(wanted)) {
@@ -127,18 +129,19 @@ public class User implements Serializable{
         this.points = points;
     }
 
-
     /**
      * clone equals toString
      */
 
-     public User clone() {
+    public User clone() {
         return new User(this);
     }
 
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         User user = (User) o;
         return points == user.points &&
@@ -162,14 +165,16 @@ public class User implements Serializable{
                 ", points=" + points +
                 '}';
     }
-    public String historyToString(){
+
+    public String historyToString() {
         StringBuilder sb = new StringBuilder();
-        for(int i=history.size()-1;i >= 0; i--){
+        for (int i = history.size() - 1; i >= 0; i--) {
             sb.append(history.get(i)).append("\n");
         }
-        
+
         return sb.toString();
     }
+
     public String libraryToString() {
         StringBuilder sb = new StringBuilder();
         for (MusicCollection mc : library) {
@@ -178,12 +183,10 @@ public class User implements Serializable{
         }
         return sb.toString();
     }
-    
 
     /**
      * Metodos
      */
-
 
     // example for now
     public void addPlaylist(MusicCollection playlist) {
@@ -196,11 +199,12 @@ public class User implements Serializable{
     }
 
     public void play(Music music) {
-        //making the music count++
+        // making the music count++
         music.playMusic();
 
         // adding the points
-        this.points += plan.getPointsOnStream(this);;
+        this.points += plan.getPointsOnStream(this);
+        ;
 
         // adding to history
         Streamed stream = new Streamed(music.getName(), LocalDateTime.now());
@@ -219,7 +223,7 @@ public class User implements Serializable{
 
     public List<String> getMusicBetween(LocalDateTime start, LocalDateTime end) {
         List<String> names = new ArrayList<>();
-    
+
         for (Streamed s : history) {
             LocalDateTime time = s.getTime();
             if ((start == null || !time.isBefore(start)) && (end == null || !time.isAfter(end))) {
@@ -228,11 +232,46 @@ public class User implements Serializable{
         }
         return names;
     }
-    public Boolean canSkip(){
+
+    public Boolean canSkip() {
         return true;
     }
+
     public void addToLibrary(MusicCollection collection) {
         library.add(collection);
     }
-    
+
+    public Map<Genre, Integer> buildGenreStats(SpotifUM spotifUM) {
+        Map<Genre, Integer> genreCounts = new HashMap<>();
+
+        // The most recent ones are always on the end of the arrayList
+        int start = Math.max(history.size() - 100, 0);
+        for (int i = start; i < history.size(); i++) {
+            Streamed streamed = history.get(i);
+            Music music = spotifUM.getMusic(streamed.getMusicName());
+            if (music != null) {
+                for (Genre genre : music.getGenres()) {
+                    genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
+                }
+            }
+        }
+
+        return genreCounts;
+    }
+
+    public int countSongsAllTime() {
+        return history.size();
+    }
+
+    public int countSongsBetween(LocalDateTime start, LocalDateTime end) {
+        int count = 0;
+        for (Streamed streamed : this.history) {
+            LocalDateTime time = streamed.getTime();
+            if ((time.isEqual(start) || time.isAfter(start)) && (time.isEqual(end) || time.isBefore(end))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

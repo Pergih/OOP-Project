@@ -268,7 +268,7 @@ public class MenuHandler {
 
     public void showAlbumMenu(User user, Album album) {
         while (true) {
-
+            
             System.out.println("Album options:");
             System.out.println("1. Show musics");
             System.out.println("2. Play"); // random, comecar por onde e poder skipar ou n
