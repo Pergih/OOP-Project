@@ -8,11 +8,13 @@ public class SpotifUM implements Serializable {
     private Map<String, Music> musics;
     private Map<String, Album> albums;
     private Map<String, RandomPlaylist> randomPlaylists;
+    private Map<String, Playlist> playlists;
 
     public SpotifUM() {
         users = new HashMap<String, User>();
         musics = new HashMap<String, Music>();
         albums = new HashMap<String, Album>();
+        playlists = new HashMap<String,Playlist>();
         randomPlaylists = new HashMap<>();
     }
 
@@ -45,6 +47,9 @@ public class SpotifUM implements Serializable {
     public void addAlbum(Album album) {
         albums.put(album.getName(), album);
     }
+    public void addPlaylist(Playlist playlist){
+        playlists.put(playlist.getName(),playlist);
+    }
     
     public void addRandomPlaylist(RandomPlaylist RandomPlaylist) {
         randomPlaylists.put(RandomPlaylist.getName(), RandomPlaylist);
@@ -70,6 +75,12 @@ public class SpotifUM implements Serializable {
 
     public Music getMusic(String music) {
         return musics.get(music);
+    }
+    public Playlist getPlaylist(String playlist){
+        return playlists.get(playlist);
+    }
+    public Set<String> getPlaylistNames() {
+        return playlists.keySet();
     }
     public Set<String> getMusicNames() {
         return musics.keySet();
