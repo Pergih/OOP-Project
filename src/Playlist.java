@@ -1,5 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Playlist implements MusicCollection, Serializable {
 
@@ -77,6 +79,14 @@ public class Playlist implements MusicCollection, Serializable {
         return musicList;
     }
 
+     public Set<String> getMusicNames() {
+        Set<String> names = new HashSet<>();
+        for (Music music : musicList) {
+            names.add(music.getName());
+        }
+        return names;
+    }
+    
     public Music getMusic(int index) {
         return musicList.get(index);
     }

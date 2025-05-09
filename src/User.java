@@ -204,7 +204,7 @@ public class User implements Serializable {
 
         // adding the points
         this.points += plan.getPointsOnStream(this);
-        ;
+        
 
         // adding to history
         Streamed stream = new Streamed(music.getName(), LocalDateTime.now());

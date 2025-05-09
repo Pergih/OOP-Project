@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+
 /**
- * Represents a MusicFactory  that has methods to create a music
+ * Represents a MusicFactory that has methods to create a music
  */
 public class MusicFactory {
     /**
@@ -10,13 +11,13 @@ public class MusicFactory {
      * 
      * @param scanner for the inputs.
      * 
-     
+     * 
      */
-    public static Music create(Scanner scanner) {
-        
+    public static Music create(Scanner scanner, SpotifUM spotifUM) {
+
         System.out.print("Music name: ");
         String name = scanner.nextLine();
-        //interpreter
+        // interpreter
         HashSet<String> interpreter = new HashSet<>();
         System.out.println("Enter the interpreters (music artists) line by line (type 'END' to finish):");
         String line = "";
@@ -26,10 +27,10 @@ public class MusicFactory {
                 interpreter.add(line);
             }
         }
-    
+
         System.out.print("Record label: ");
         String recordLabel = scanner.nextLine();
-    
+
         // Genres
         HashSet<Genre> genres = new HashSet<>();
         System.out.println("Available genres:");
@@ -45,11 +46,11 @@ public class MusicFactory {
                 System.out.println("Unknown genre: " + g.trim() + " (skipped)");
             }
         }
-    
+
         // Lyrics
         ArrayList<String> lyrics = new ArrayList<>();
         System.out.println("Enter lyrics line by line (type 'END' to finish):");
-         line = "";
+        line = "";
         while (!line.equalsIgnoreCase("END")) {
             line = scanner.nextLine();
             if (!line.equalsIgnoreCase("END")) {
@@ -57,7 +58,6 @@ public class MusicFactory {
             }
         }
 
-    
         // Music notes
         ArrayList<String> musicNotes = new ArrayList<>();
         System.out.println("Enter music notes line by line (type 'END' to finish):");
@@ -69,11 +69,10 @@ public class MusicFactory {
             }
         }
 
-    
         // Duration
         System.out.print("Duration in seconds: ");
         int duration = Integer.parseInt(scanner.nextLine());
-    
+
         // Create music
         System.out.println("Select music type:");
         System.out.println("1. Normal Music");
@@ -99,9 +98,37 @@ public class MusicFactory {
                 System.out.println("Invalid option, defaulting to Normal Music.");
                 music = new NormalMusic(name, interpreter, recordLabel, genres, lyrics, musicNotes, duration);
         }
+        while (true) {
+            System.out.println("Add music to existing album or create a new one");
+            System.out.println("1. Existing album");
+            System.out.println("2. New Album");
+            String option = scanner.nextLine();
+            switch (option) {
+                case "1":
+                    System.out.println("Showing available Albums: \n" + spotifUM.getAlbumNames().toString());
+                    System.out.print("Enter Album  (or 'exit'): ");
+                    String albumString = scanner.nextLine();
+                    if (albumString.equalsIgnoreCase("exit"))
+                        break;
+                    Album album = spotifUM.getAlbum(albumString);
+                    if (album == null) {
+                        System.out.println("Album not found");
+                        break;
+                    }
+                    return music;
+                case "2":
+                    Album newAlbum = AlbumFactory.create(scanner, spotifUM);
+                    spotifUM.addAlbum(newAlbum);
+                    newAlbum.addMusic(music);
 
-            
-        return music; 
+                    return music;
+                default:
+                    System.out.println("Invalid option");
+                    break;
+
+            }
+        }
+        
     }
 
 }

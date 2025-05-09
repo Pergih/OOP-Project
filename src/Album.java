@@ -124,4 +124,7 @@ public class Album implements MusicCollection, Serializable {
 
         return hash;
     }
+    public void addMusic(Music music) {
+        musicList.add(music);
+    }
 }
