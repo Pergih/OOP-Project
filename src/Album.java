@@ -126,5 +126,8 @@ public class Album implements MusicCollection, Serializable {
     }
     public void addMusic(Music music) {
         musicList.add(music);
+        for(String a:music.getInterpreter()){
+            authors.add(a);
+        }
     }
 }

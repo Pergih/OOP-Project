@@ -4,6 +4,18 @@ pepe
 pepega@hotmail.com
 pepega's house
 3
+2
+user1
+user sob1
+user1@gmail.com
+casa do user 1
+2
+2
+user2
+user sob2
+user2@gmail.com
+casa do user 2
+1
 3
 1
 Bohemian Rhapsody
@@ -67,5 +79,92 @@ E  G  F  E  D#  E  F  G  F  E  D#  E  F  G  A  G
 END
 355
 1
+2
+A Night at the Opera
+END
+1
+MUSICA1
+AUTOR1
+AUTOR2
+END
+Produtora1
+ROCK,HIPHOP
+letra da musica 1
+isto faz parte da musica1
+isto faz parte da musica1
+isto faz parte da musica1 
+END
+DO RE MI FA SOL LA SI DO
+END
+60
+2
+2
+ALBUM1
+END
+1
+MUSICA2
+AUTOR2
+AUTOR3
+END
+Produtora2
+JAZZ,CLASSICAL
+letra da musica 2
+isto faz parte da musica2
+isto faz parte da musica2
+isto faz parte da musica2
+END
+DO2 RE2 MI2 FA2 SOL2 LA2 SI2 DO2
+END
+80
+2
+ALBUM2
+END
+1
+MUSICA3
+AUTOR4
+END
+Produtora3
+POP
+letra da musica 3
+isto faz parte da musica3
+isto faz parte da musica3
+isto faz parte da musica3
+END
+DO3 RE3 MI3 FA3 SOL3 LA3 SI3 DO3
+END
+200
+3
+7
+1
+ALBUM1
+1
+MUSICA4
+AUTOR5
+AUTOR6
+END
+Produtora4
+JAZZ
+letra da musica 4
+isto faz parte da musica4
+isto faz parte da musica4
+isto faz parte da musica4 
+END
+DO4 RE4 MI4 FA4 SOL4 LA4 SI4 DO4
+END
+120
+1
+2
+ALBUM3
+END
+2
+ALBUM4
+MUSICA1
+MUSICA4
+END
+3
+PLAYLIST1
+MUSICA3
+MUSICA2
+END
 0
 0
