@@ -92,9 +92,10 @@ public class MediaMusic extends Music {
     }
 
     /**
-     * Gives the hashcode for a Mediamusic
-     * 
-     * @return int
+     * Generates a hash code for this music based on name, duration, record
+     * label  and video .
+     *
+     * @return the hash code value
      */
     public int hashCode() {
         int hash = super.hashCode();

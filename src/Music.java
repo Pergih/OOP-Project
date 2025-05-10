@@ -8,7 +8,7 @@ import java.util.Objects;
  * Represents a music with a name interpreter, record_label, genres,lyrics,
  * music, duration and streams .
  */
-public abstract class Music implements Serializable{
+public abstract class Music implements Serializable {
     private String name, record_label;
     private HashSet<Genre> genres;
     private HashSet<String> interpreter;
@@ -33,22 +33,20 @@ public abstract class Music implements Serializable{
     }
 
     /**
-     * Constructs a new Music with parameters.
+     * Constructs a new Music with the given parameters.
      *
-     * @param name
-     * @param interpreter
-     * @param genres
-     * @param record_label
-     * @param lyrics
-     * @param music
-     * @param duration
-     * @param streams
-     * 
+     * @param name         the name of the music
+     * @param interpreter  the set of interpreters
+     * @param record_label the record label
+     * @param genres       the set of genres
+     * @param lyrics       the lyrics of the song
+     * @param music        the music notation or representation
+     * @param duration     the duration of the song in seconds
+     *                     this is for a new music
      */
 
-
-     public Music(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
-                  ArrayList<String> lyrics, ArrayList<String> music, int duration) {
+    public Music(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
+            ArrayList<String> lyrics, ArrayList<String> music, int duration) {
         this.name = name;
         this.interpreter = interpreter;
         this.record_label = record_label;
@@ -59,6 +57,18 @@ public abstract class Music implements Serializable{
         this.streams = 0;
     }
 
+    /**
+     * Constructs a new Music with the given parameters.
+     *
+     * @param name         the name of the music
+     * @param interpreter  the set of interpreters
+     * @param record_label the record label
+     * @param genres       the set of genres
+     * @param lyrics       the lyrics of the song
+     * @param music        the music notation or representation
+     * @param duration     the duration of the song in seconds
+     *                     this is for creating a music with more streams
+     */
     public Music(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
             ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
         this.name = name;
@@ -69,6 +79,7 @@ public abstract class Music implements Serializable{
         this.lyrics = lyrics;
         this.music = music;
         this.genres = genres;
+
     }
 
     /**
@@ -87,12 +98,12 @@ public abstract class Music implements Serializable{
         this.streams = m.getStreams();
     }
 
-   /**
- * Checks if this music object is equal to another object.
- *
- * @param object the object to compare with
- * @return true if the objects are equal, false otherwise
- */
+    /**
+     * Checks if this music object is equal to another object.
+     *
+     * @param object the object to compare with
+     * @return true if the objects are equal, false otherwise
+     */
     public boolean equals(Object o) {
         if (this == o)
             return true; // Same object
@@ -111,11 +122,11 @@ public abstract class Music implements Serializable{
     }
 
     /**
-     * Convert the music in a String
-     * 
-     
-     * @return String
+     * Converts the music object into a string representation.
+     *
+     * @return a string representing this music
      */
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Name: ").append(this.name).append('\n');
@@ -137,7 +148,14 @@ public abstract class Music implements Serializable{
         sb.append("Streams: ").append(this.streams).append('\n');
         return sb.toString();
     }
-    public void playLyricString(){
+
+    /**
+     * Convert the lyrics of a song in a string
+     * 
+     * 
+     * @return the lyrics of the song as a string
+     */
+    public void playLyricString() {
         StringBuilder sb = new StringBuilder();
         for (String line : this.lyrics) {
             sb.append(line).append('\n');
@@ -146,10 +164,12 @@ public abstract class Music implements Serializable{
     }
 
     /**
-     * Gives the hashcode for the genres and interpreters
-     * 
-     * @return int
+     * Generates a hash code for this music based on name, duration, and record
+     * label.
+     *
+     * @return the hash code value
      */
+
     public int hashCode() {
         int hash = 12;
         hash = 37 * hash + this.name.hashCode();
@@ -192,7 +212,8 @@ public abstract class Music implements Serializable{
      * @param interpreter the stirng of interpreter to set
      */
     public void setInterpreter(HashSet<String> interpreter) {
-        this.interpreter = new HashSet<>(interpreter);;
+        this.interpreter = new HashSet<>(interpreter);
+        ;
     }
 
     /**
@@ -305,8 +326,12 @@ public abstract class Music implements Serializable{
 
     }
 
-    public void playMusic(){
-        this.streams+=1;
+    /**
+     * Plays the music by printing its lyrics and incrementing the stream count.
+     */
+
+    public void playMusic() {
+        this.streams += 1;
         this.playLyricString();
     }
 }

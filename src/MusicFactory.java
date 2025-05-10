@@ -10,6 +10,7 @@ public class MusicFactory {
      * Creates a music.
      * 
      * @param scanner for the inputs.
+     * @param spotifUM to get the musics and other things
      * 
      * 
      */
@@ -115,6 +116,7 @@ public class MusicFactory {
                         System.out.println("Album not found");
                         break;
                     }
+                    album.addMusic(music);
                     return music;
                 case "2":
                     Album newAlbum = AlbumFactory.create(scanner, spotifUM);

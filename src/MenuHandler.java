@@ -80,7 +80,7 @@ public class MenuHandler {
 
     // ========== USER MODE ==========
     /**
-     * [Displays the User menu of the SpotifUM application.]
+     * Displays the User menu of the SpotifUM application.
      *
      * @param user The chosen user.
      */
@@ -180,6 +180,11 @@ public class MenuHandler {
 
     // ==========
     // LIBRARYMENU=========================================================================================
+    /**
+     * Displays the Ulibrary menu of the SpotifUM application.
+     *
+     * @param user The chosen user.
+     */
     public void showLibraryMenu(User user) {
         while (true) {
             System.out.println("Library options:");
@@ -234,6 +239,12 @@ public class MenuHandler {
 
     // =================== Playlist
     // ==================================================================
+    /**
+     * Displays the Playlist menu of the SpotifUM application.
+     *
+     * @param user     The chosen user.
+     * @param playlist the chosen playlist
+     */
     public void showPlaylistMenu(User user, Playlist playlist) {
         while (true) {
             System.out.println("Playlist options:");
@@ -266,6 +277,12 @@ public class MenuHandler {
         }
     }
 
+    /**
+     * Displays the types of play to a Playlist in SpotifUM application.
+     *
+     * @param user     The chosen user.
+     * @param playlist the chosen playlist
+     */
     public void showPlayPlaylistMenu(User user, MusicCollection playlist) {
         int pos = 0;
         int last = (playlist.getMusicList().size()) - 1;
@@ -339,6 +356,12 @@ public class MenuHandler {
 
     // ========== Music
     // =========================================================================================
+    /**
+     * Displays the music Menu of the SpotifUM application.
+     *
+     * @param user  The chosen user.
+     * @param music the chosen music
+     */
     public void showMusicMenu(User user, Music music) {
         while (true) {
             System.out.println("\n" + music.getName());
@@ -373,7 +396,12 @@ public class MenuHandler {
 
     // ========== ALBUM
     // =========================================================================================
-
+    /**
+     * Displays the Album Menu of the SpotifUM application.
+     *
+     * @param user  The chosen user.
+     * @param album the chosen album
+     */
     public void showAlbumMenu(User user, Album album) {
         while (true) {
 
@@ -407,6 +435,12 @@ public class MenuHandler {
         }
     }
 
+    /**
+     * Displays the Play menu of an Album Menu in SpotifUM application.
+     *
+     * @param user  The chosen user.
+     * @param album the chosen album
+     */
     public void showPlayAlbumMenu(User user, MusicCollection album) {
         int pos = 0;
 
@@ -477,6 +511,13 @@ public class MenuHandler {
 
     // ========== RANDOMPLAYLIST
     // =========================================================================================
+    /**
+     * Displays the Menu to chose the random playlist that a user wants to listen in
+     * the SpotifUM application.
+     *
+     * @param user The chosen user.
+     * 
+     */
     public void showChooseRandomPlaylistMenu(User user) {
 
         while (true) {
@@ -515,6 +556,12 @@ public class MenuHandler {
 
     }
 
+    /**
+     * Displays the Random Playlist Menu of the SpotifUM application.
+     *
+     * @param user           The chosen user.
+     * @param randomPlaylist the chosen random playlist
+     */
     public void showRandomPlaylistMenu(User user, RandomPlaylist randomPlaylist) {
         while (true) {
             System.out.println("\n" + randomPlaylist.getName());
@@ -544,6 +591,12 @@ public class MenuHandler {
         }
     }
 
+    /**
+     * Displays the Play menu of a Random Playlist in the SpotifUM application.
+     *
+     * @param user           The chosen user.
+     * @param randomPlaylist the chosen random playlist
+     */
     public void showRandomPlayMenu(User user, RandomPlaylist randomPlaylist) {
         for (Music music : randomPlaylist.getMusicList()) {
             boolean waitingForPlay = true;
@@ -586,6 +639,8 @@ public class MenuHandler {
     /**
      * Displays the Admin menu of the SpotifUM application.
      * Handles the creation of musics album playlists etc.
+     * 
+     * @param adminUser the admin user
      */
     public void showAdminMenu(User adminUser) {
         /* menu do admin */
@@ -606,7 +661,7 @@ public class MenuHandler {
 
             switch (choice) {
                 case "1":
-                    Music newMusic = MusicFactory.create(scanner,spotifUM);
+                    Music newMusic = MusicFactory.create(scanner, spotifUM);
                     spotifUM.addMusic(newMusic);
                     System.out.println("Music created: " + newMusic.getName());
                     break;
@@ -651,6 +706,10 @@ public class MenuHandler {
     }
 
     // ============ Statistics===============================================
+    /**
+     * Displays the statistics menu of the SpotifUM application.
+     * 
+     */
     public void showStatisticsMenu() {
         while (true) {
             System.out.println("\nChoose an option:");
@@ -667,29 +726,29 @@ public class MenuHandler {
 
             switch (input) {
                 case "1":
-                    //code
+                    // code
                     break;
                 case "2":
-                    //code
+                    // code
                     break;
                 case "3":
-                    //code
+                    // code
                     break;
                 case "4":
-                    //code
+                    // code
                     break;
                 case "5":
-                    //code
+                    // code
                     break;
                 case "6":
-                    //code
+                    // code
                     break;
                 case "7":
-                    //code
+                    // code
                     break;
                 case "0":
-                System.out.println("Exiting");
-                return;
+                    System.out.println("Exiting");
+                    return;
                 default:
                     System.out.println("Invalid Option");
                     break;
