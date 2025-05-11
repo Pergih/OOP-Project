@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -668,6 +671,9 @@ public class MenuHandler {
      */
     public void showStatisticsMenu() {
         while (true) {
+            List<Music> allMusics = new ArrayList<>(spotifUM.getMusics().values());
+            List<User> allUsers = new ArrayList<>(spotifUM.getUsers().values());
+            List<Playlist> allPlaylists = new ArrayList<>(spotifUM.getPlaylists().values());
             System.out.println("\nChoose an option:");
             System.out.println("1. Most played song");
             System.out.println("2. Most listened to interpreter");
@@ -682,25 +688,76 @@ public class MenuHandler {
 
             switch (input) {
                 case "1":
-                    // code
+                    //search for the most played song
+                    //sort allMusics by streams
+                    allMusics.sort((a, b) -> Integer.compare(b.getStreams(), a.getStreams()));
+                    System.out.println("Most played song: " + allMusics.get(0).getName() + " with "
+                            + allMusics.get(0).getStreams() + " streams");
                     break;
                 case "2":
-                    // code
+                    //make a map with the interpreters and the number of streams
+                    HashMap<String, Integer> interpreters = new HashMap<>();
+                    for (Music music : allMusics) {
+                        for (String interpreter : music.getInterpreter()) {
+                            if (interpreters.containsKey(interpreter)) {
+                                interpreters.put(interpreter, interpreters.get(interpreter) + music.getStreams());
+                            } else {
+                                interpreters.put(interpreter, music.getStreams());
+                            }
+                        }
+                    }
+                    //sort the map by value
+                    List<HashMap.Entry<String, Integer>> listInterpreters = new ArrayList<>(interpreters.entrySet());
+                    listInterpreters.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+                    System.out.println("Most listened to interpreter: " + listInterpreters.get(0).getKey() + " with "
+                            + listInterpreters.get(0).getValue() + " streams");
                     break;
                 case "3":
-                    // code
+                    //sort allUsers by history size (isto dá desde o início, não desde x tempo)
+                    allUsers.sort((a, b) -> Integer.compare(b.getHistory().size(), a.getHistory().size()));
+                    System.out.println("User with the most songs listened to: " + allUsers.get(0).getName() + " with "
+                            + allUsers.get(0).getHistory().size() + " songs listened to");
                     break;
                 case "4":
-                    // code
+                    //sort allUsers by points
+                    allUsers.sort((a, b) -> Integer.compare(b.getPoints(), a.getPoints()));
+                    System.out.println("User with the most points: " + allUsers.get(0).getName() + " with "
+                            + allUsers.get(0).getPoints() + " points");
                     break;
                 case "5":
-                    // code
+                    //make a map with the genres and the number of streams
+                    HashMap<Genre, Integer> genres = new HashMap<>();
+                    for (Music music : allMusics) {
+                        for (Genre genre : music.getGenres()) {
+                            if (genres.containsKey(genre)) {
+                                genres.put(genre, genres.get(genre) + music.getStreams());
+                            } else {
+                                genres.put(genre, music.getStreams());
+                            }
+                        }
+                    }
+                    //sort the map by value
+                    List<HashMap.Entry<Genre, Integer>> listGenres = new ArrayList<>(genres.entrySet());
+                    listGenres.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+                    System.out.println("Most played genre: " + listGenres.get(0).getKey() + " with "
+                            + listGenres.get(0).getValue() + " streams");
                     break;
                 case "6":
-                    // code
+                    // count the number of public playlists
+
+                    int count = 0;
+                    for (Playlist playlist : allPlaylists) {
+                        if (playlist instanceof PublicPlaylist) {
+                            count++;
+                        }
+                    }
+                    System.out.println("Number of public playlists: " + count);
                     break;
                 case "7":
-                    // code
+                    //sort allUsers by library size
+                    allUsers.sort((a, b) -> Integer.compare(b.getLibrary().size(), a.getLibrary().size()));
+                    System.out.println("User with the most playlists: " + allUsers.get(0).getName() + " with "
+                            + allUsers.get(0).getLibrary().size() + " playlists");
                     break;
                 case "0":
                     System.out.println("Exiting");

@@ -243,6 +243,17 @@ public class User implements Serializable {
         library.add(collection);
     }
 
+    public void removeFromLibrary(MusicCollection collection) {
+        library.remove(collection);
+    }
+
+    public void removeFromLibrary(String name) {
+        MusicCollection toRemove = getFromLibrary(name);
+        if (toRemove != null) {
+            library.remove(toRemove);
+        }   
+    }
+
     public Map<Genre, Integer> buildGenreStats(SpotifUM spotifUM) {
         Map<Genre, Integer> genreCounts = new HashMap<>();
 

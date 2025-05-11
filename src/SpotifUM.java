@@ -35,6 +35,10 @@ public class SpotifUM implements Serializable {
         return randomPlaylists;
     }
 
+    public Map<String, Playlist> getPlaylists() {
+        return playlists;
+    }
+
     // Add methods
     public void addUser(User user) {
         users.put(user.getHandle(), user);
