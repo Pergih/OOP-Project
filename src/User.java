@@ -133,9 +133,7 @@ public class User implements Serializable {
      * clone equals toString
      */
 
-    public User clone() {
-        return new User(this);
-    }
+    
 
     public boolean equals(Object o) {
         if (this == o)
