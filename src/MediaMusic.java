@@ -60,6 +60,9 @@ public class MediaMusic extends Music {
     public int getVideo() {
         return video;
     }
+    public void setVideo(int i){
+        this.video=i;
+    }
 
     /**
      * Checks if this Media music object is equal to another object.
