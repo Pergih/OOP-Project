@@ -10,4 +10,5 @@ public enum Genre {
     COUNTRY,
     RNB,
     SOUL
+
 }

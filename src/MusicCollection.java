@@ -13,6 +13,7 @@ public interface MusicCollection {
     public String getName();
     public void setMusic(Music m, int index);
     public void removeMusic(int index);
+    public ArrayList<String> getMusicListNames();
     
 
 

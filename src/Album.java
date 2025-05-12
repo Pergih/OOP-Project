@@ -65,6 +65,15 @@ public class Album implements MusicCollection, Serializable {
     public HashSet<String> getAuthors() {
         return new HashSet<>(authors);
     }
+
+    public ArrayList<String> getMusicListNames() {
+        ArrayList<String> names = new ArrayList<>();
+        for (Music music : this.musicList) {
+            names.add(music.getName());
+        }
+        return names;
+    }
+    
     // setters
 
     public void setName(String name) {
@@ -128,9 +137,10 @@ public class Album implements MusicCollection, Serializable {
 
         return hash;
     }
+
     public void addMusic(Music music) {
         musicList.add(music);
-        for(String a:music.getInterpreter()){
+        for (String a : music.getInterpreter()) {
             authors.add(a);
         }
     }

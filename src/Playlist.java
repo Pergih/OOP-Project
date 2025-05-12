@@ -48,6 +48,9 @@ public class Playlist implements MusicCollection, Serializable {
                         .append(" by ").append(music.getInterpreter())
                         .append(" (").append(music.getDuration()).append("s, ")
                         .append(music.getStreams()).append(" streams)\n");
+                        .append(" by ").append(music.getInterpreter())
+                        .append(" (").append(music.getDuration()).append("s, ")
+                        .append(music.getStreams()).append(" streams)\n");
             }
         }
 
@@ -94,6 +97,14 @@ public class Playlist implements MusicCollection, Serializable {
 
     public Music getMusic(int index) {
         return musicList.get(index);
+    }
+
+    public ArrayList<String> getMusicListNames() {
+        ArrayList<String> names = new ArrayList<>();
+        for (Music music : this.musicList) {
+            names.add(music.getName());
+        }
+        return names;
     }
 
     // setters
