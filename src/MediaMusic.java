@@ -32,14 +32,14 @@ public class MediaMusic extends Music {
      * @param video
      */
     public MediaMusic(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
-            ArrayList<String> lyrics, ArrayList<String> music, int duration) {
+            ArrayList<String> lyrics, ArrayList<String> music, int duration,int video) {
         super(name, interpreter, record_label, genres, lyrics, music, duration);
-        this.video=1;
+        this.video=video;
     }
     public MediaMusic(String name, HashSet<String> interpreter, String record_label, HashSet<Genre> genres,
-            ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams) {
+            ArrayList<String> lyrics, ArrayList<String> music, int duration, int streams,int video) {
         super(name, interpreter, record_label, genres, lyrics, music, duration, streams);
-        this.video=1;
+        this.video=video;
     }
 
     /**

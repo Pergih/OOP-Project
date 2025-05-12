@@ -4,6 +4,10 @@ public enum Genre {
     POP,
     JAZZ,
     CLASSICAL,
-    HIPHOP
-
+    HIPHOP,
+    ELECTRONIC,
+    FUNK,
+    COUNTRY,
+    RNB,
+    SOUL
 }
