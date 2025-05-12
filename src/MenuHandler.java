@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -671,9 +673,6 @@ public class MenuHandler {
      */
     public void showStatisticsMenu() {
         while (true) {
-            List<Music> allMusics = new ArrayList<>(spotifUM.getMusics().values());
-            List<User> allUsers = new ArrayList<>(spotifUM.getUsers().values());
-            List<Playlist> allPlaylists = new ArrayList<>(spotifUM.getPlaylists().values());
             System.out.println("\nChoose an option:");
             System.out.println("1. Most played song");
             System.out.println("2. Most listened to interpreter");
@@ -688,76 +687,74 @@ public class MenuHandler {
 
             switch (input) {
                 case "1":
-                    //search for the most played song
-                    //sort allMusics by streams
-                    allMusics.sort((a, b) -> Integer.compare(b.getStreams(), a.getStreams()));
-                    System.out.println("Most played song: " + allMusics.get(0).getName() + " with "
-                            + allMusics.get(0).getStreams() + " streams");
+                    // search for the most played song
+                    System.out.println(spotifUM.getMostPlayedMusic().toString());
                     break;
                 case "2":
-                    //make a map with the interpreters and the number of streams
-                    HashMap<String, Integer> interpreters = new HashMap<>();
-                    for (Music music : allMusics) {
-                        for (String interpreter : music.getInterpreter()) {
-                            if (interpreters.containsKey(interpreter)) {
-                                interpreters.put(interpreter, interpreters.get(interpreter) + music.getStreams());
-                            } else {
-                                interpreters.put(interpreter, music.getStreams());
-                            }
-                        }
-                    }
-                    //sort the map by value
-                    List<HashMap.Entry<String, Integer>> listInterpreters = new ArrayList<>(interpreters.entrySet());
-                    listInterpreters.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
-                    System.out.println("Most listened to interpreter: " + listInterpreters.get(0).getKey() + " with "
-                            + listInterpreters.get(0).getValue() + " streams");
+                    // make a map with the interpreters and the number of streams
+                    String r = spotifUM.getMostListenedInterpreter();
+                    System.out.println("Most listened to interpreter: " + r + " with "
+                            + spotifUM.getMusic(r).getStreams() + " streams");
                     break;
                 case "3":
-                    //sort allUsers by history size (isto dá desde o início, não desde x tempo)
-                    allUsers.sort((a, b) -> Integer.compare(b.getHistory().size(), a.getHistory().size()));
-                    System.out.println("User with the most songs listened to: " + allUsers.get(0).getName() + " with "
-                            + allUsers.get(0).getHistory().size() + " songs listened to");
+                    System.out.println("Do you want to check:");
+                    System.out.println("1. All-time most active listener");
+                    System.out.println("2. Most active listener between two dates");
+                    System.out.print("Option: ");
+                    String choice = scanner.nextLine();
+
+                    switch (choice) {
+                        case "1":
+                            spotifUM.getTopListener(null, null);
+                            break;
+
+                        case "2":
+                            try {
+                                System.out.print("Enter start date-time (yyyy-MM-ddTHH:mm): ");
+                                String startInput = scanner.nextLine();
+                                LocalDateTime start = LocalDateTime.parse(startInput);
+
+                                System.out.print("Enter end date-time (yyyy-MM-ddTHH:mm): ");
+                                String endInput = scanner.nextLine();
+                                LocalDateTime end = LocalDateTime.parse(endInput);
+
+                                spotifUM.getTopListener(start, end);
+                            } catch (DateTimeParseException e) {
+                                System.out.println(
+                                        "Invalid date format. Please use yyyy-MM-ddTHH:mm (e.g., 2025-05-08T14:30).");
+                            }
+                            break;
+
+                        default:
+                            System.out.println("Invalid option.");
+                            break;
+                    }
                     break;
+
                 case "4":
-                    //sort allUsers by points
-                    allUsers.sort((a, b) -> Integer.compare(b.getPoints(), a.getPoints()));
-                    System.out.println("User with the most points: " + allUsers.get(0).getName() + " with "
-                            + allUsers.get(0).getPoints() + " points");
+                    User rr = spotifUM.getMostPointsUser();
+                    System.out.println("Most listened to interpreter: " + rr + " with "
+                            + rr.getPoints() + " streams");
                     break;
                 case "5":
-                    //make a map with the genres and the number of streams
-                    HashMap<Genre, Integer> genres = new HashMap<>();
-                    for (Music music : allMusics) {
-                        for (Genre genre : music.getGenres()) {
-                            if (genres.containsKey(genre)) {
-                                genres.put(genre, genres.get(genre) + music.getStreams());
-                            } else {
-                                genres.put(genre, music.getStreams());
-                            }
-                        }
-                    }
-                    //sort the map by value
-                    List<HashMap.Entry<Genre, Integer>> listGenres = new ArrayList<>(genres.entrySet());
-                    listGenres.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
-                    System.out.println("Most played genre: " + listGenres.get(0).getKey() + " with "
-                            + listGenres.get(0).getValue() + " streams");
+                    Genre topGenre = spotifUM.getMostPlayedGenre();
+                    System.out.println("Most played genre: " + topGenre);
                     break;
                 case "6":
                     // count the number of public playlists
 
-                    int count = 0;
-                    for (Playlist playlist : allPlaylists) {
-                        if (playlist instanceof PublicPlaylist) {
-                            count++;
-                        }
-                    }
+                    int count = spotifUM.getNumberPublicPlaylists();
                     System.out.println("Number of public playlists: " + count);
                     break;
                 case "7":
-                    //sort allUsers by library size
-                    allUsers.sort((a, b) -> Integer.compare(b.getLibrary().size(), a.getLibrary().size()));
-                    System.out.println("User with the most playlists: " + allUsers.get(0).getName() + " with "
-                            + allUsers.get(0).getLibrary().size() + " playlists");
+                    // sort allUsers by library size
+                    User top = spotifUM.getUserWithMostPlaylists();
+                    if (top != null) {
+                        System.out.println("User with the most playlists: " + top.getName());
+                    } else {
+                        System.out.println("No user found.");
+                    }
+
                     break;
                 case "0":
                     System.out.println("Exiting");
