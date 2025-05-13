@@ -21,6 +21,12 @@ public class Playlist implements MusicCollection, Serializable {
         this.creator = creator;
     }
 
+    public Playlist(Playlist p) {
+        this.creator = p.getCreator();
+        this.musicList = p.getMusicList();
+        this.name = p.getName();
+    }
+
     // toString
 
     @Override
@@ -39,17 +45,16 @@ public class Playlist implements MusicCollection, Serializable {
             for (int i = 0; i < musicList.size(); i++) {
                 Music music = musicList.get(i);
                 sb.append("  ").append(i + 1).append(". ").append(music.getName())
-                .append(" by ").append(music.getInterpreter())
-                .append(" (").append(music.getDuration()).append("s, ")
-                .append(music.getStreams()).append(" streams)\n");
+                        .append(" by ").append(music.getInterpreter())
+                        .append(" (").append(music.getDuration()).append("s, ")
+                        .append(music.getStreams()).append(" streams)\n");
             }
         }
 
         return sb.toString();
     }
 
-
-    //getters
+    // getters
 
     public int getStreams() {
         int totalStreams = 0;
@@ -79,19 +84,19 @@ public class Playlist implements MusicCollection, Serializable {
         return musicList;
     }
 
-     public Set<String> getMusicNames() {
+    public Set<String> getMusicNames() {
         Set<String> names = new HashSet<>();
         for (Music music : musicList) {
             names.add(music.getName());
         }
         return names;
     }
-    
+
     public Music getMusic(int index) {
         return musicList.get(index);
     }
 
-    //setters
+    // setters
     public void setName(String name) {
         this.name = name;
     }
@@ -99,7 +104,7 @@ public class Playlist implements MusicCollection, Serializable {
     public void setCreator(User creator) {
         this.creator = creator;
     }
-    
+
     public void setMusicList(ArrayList<Music> musicList) {
         this.musicList = musicList;
     }
@@ -108,11 +113,11 @@ public class Playlist implements MusicCollection, Serializable {
         this.musicList.set(index, m);
     }
 
-    //ops
+    // ops
     public void addMusic(Music m) {
         this.musicList.add(m);
     }
-    
+
     public void removeMusic(Music m) {
         this.musicList.remove(m);
     }
@@ -125,4 +130,4 @@ public class Playlist implements MusicCollection, Serializable {
         this.musicList.clear();
     }
 
-    }
+}

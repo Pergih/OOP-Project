@@ -19,7 +19,11 @@ public class Album implements MusicCollection, Serializable {
         this.name = name;
         this.authors = new HashSet<>(authors);
     }
-
+    public Album(Album a){
+        this.authors=a.getAuthors();
+        this.musicList=a.getMusicList();
+        this.name=a.getName();
+    }
     // getters
 
     public int getStreams() {
@@ -77,9 +81,9 @@ public class Album implements MusicCollection, Serializable {
         }
     }
 
-    public void setMusic(ArrayList<Music> musicList) {
-        this.musicList = musicList;
-    }
+    // public void setMusic(ArrayList<Music> musicList) {
+    //     this.musicList = musicList;
+    // }
 
     public void setAuthors(HashSet<String> authors) {
         this.authors = new HashSet<>(authors);
