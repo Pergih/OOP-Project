@@ -24,6 +24,13 @@ public class Playlist implements MusicCollection, Serializable {
         this.isPublic = isPublic;
     }
 
+    public Playlist(String name, ArrayList<Music> musicList, User creator) {
+        this.musicList = new ArrayList<>(musicList);
+        this.name = name;
+        this.creator = creator;
+        this.isPublic = false;
+    }
+    
     public Playlist(Playlist p) {
         this.creator = p.getCreator();
         this.musicList = p.getMusicList();
