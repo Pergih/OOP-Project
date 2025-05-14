@@ -5,7 +5,7 @@ import java.util.List;
 public class RandomPlaylist extends Playlist {
 
     public RandomPlaylist(String name, User creator, SpotifUM spotifUM, int n) {
-        super(name, new ArrayList<>(), creator);
+        super(name, new ArrayList<>(), creator, false);
         addRandomMusic(spotifUM, n);
     }
 

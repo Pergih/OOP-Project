@@ -8,6 +8,7 @@ public class Playlist implements MusicCollection, Serializable {
     protected User creator;
     protected String name;
     protected ArrayList<Music> musicList;
+    protected Boolean isPublic;
 
     public Playlist() {
         creator = new User();
@@ -15,16 +16,18 @@ public class Playlist implements MusicCollection, Serializable {
         name = new String();
     }
 
-    public Playlist(String name, ArrayList<Music> musicList, User creator) {
+    public Playlist(String name, ArrayList<Music> musicList, User creator, Boolean isPublic) {
         this.musicList = new ArrayList<>(musicList);
         this.name = name;
         this.creator = creator;
+        this.isPublic = isPublic;
     }
 
     public Playlist(Playlist p) {
         this.creator = p.getCreator();
         this.musicList = p.getMusicList();
         this.name = p.getName();
+        this.isPublic = false;
     }
 
     // toString
@@ -58,6 +61,10 @@ public class Playlist implements MusicCollection, Serializable {
     }
 
     // getters
+
+    public Boolean getIsPublic() {
+        return isPublic;
+    }
 
     public int getStreams() {
         int totalStreams = 0;
@@ -112,6 +119,10 @@ public class Playlist implements MusicCollection, Serializable {
         this.name = name;
     }
 
+    public void setIsPublic(Boolean isPublic) {
+        this.isPublic = isPublic;
+    }
+
     public void setCreator(User creator) {
         this.creator = creator;
     }
@@ -125,6 +136,14 @@ public class Playlist implements MusicCollection, Serializable {
     }
 
     // ops
+    public void makePublic() {
+        this.isPublic = true;
+    }
+
+    public void makePrivate() {
+        this.isPublic = false;
+    }
+
     public void addMusic(Music m) {
         this.musicList.add(m);
     }

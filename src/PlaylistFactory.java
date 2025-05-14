@@ -35,7 +35,7 @@ public class PlaylistFactory {
         Playlist pp;
         if(creator.getHandle()=="admin"){
             
-            pp= new PublicPlaylist(name, songs, creator);
+            pp= new Playlist(name, songs, creator, false);
             user.addToLibrary(pp);
             spotifUM.addPlaylist(pp);
             return pp;
@@ -48,17 +48,17 @@ public class PlaylistFactory {
         String option = scanner.nextLine();
         switch(option) {
             case "1":
-                pp=new PublicPlaylist(name, songs, creator);
+                pp=new Playlist(name, songs, creator, true);
                 user.addToLibrary(pp);
                 spotifUM.addPlaylist(pp);
                 break;
             case "2":
-                pp =new PrivatePlaylist(name, songs, creator);
+                pp =new Playlist(name, songs, creator, false);
                 user.addToLibrary(pp);
                 break;
             default:
-                System.out.println("Invalid option, defaulting to Public Playlist.");
-                pp=new PublicPlaylist(name, songs, creator);
+                System.out.println("Invalid option, defaulting to Private Playlist.");
+                pp=new Playlist(name, songs, creator, false);
                 spotifUM.addPlaylist(pp);
 
         }

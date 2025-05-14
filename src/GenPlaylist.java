@@ -2,7 +2,7 @@ import java.util.*;
 public class GenPlaylist extends Playlist {
 
     public GenPlaylist(String name, User creator, SpotifUM spotifUM, Genre genre, int duration) {
-        super(name, new ArrayList<>(), creator);
+        super(name, new ArrayList<>(), creator, false);
 
         //get random songs with genre
         List<Music> allMusics = new ArrayList<>(spotifUM.getMusics().values());
@@ -20,24 +20,23 @@ public class GenPlaylist extends Playlist {
 
     }
 
-    public GenPlaylist(String name, User creator, SpotifUM spotifUM, ArrayList<Genre> genres, int duration) {
-        super(name, new ArrayList<>(), creator);
+        public GenPlaylist(String name, User creator, SpotifUM spotifUM, Genre genre, Boolean explicitOnly) {
+        super(name, new ArrayList<>(), creator, false);
+
         //get random songs with genre
         List<Music> allMusics = new ArrayList<>(spotifUM.getMusics().values());
         Collections.shuffle(allMusics);
-        int totalDuration = 0;
+        int numberOfSongs = 0;
         for (Music music : allMusics) {
-            for (Genre genre : genres) {
-                if (music.getGenres().contains(genre) && !this.musicList.contains(music)) {
-                    this.addMusic(music);
-                    totalDuration += music.getDuration();
-                }
+            if (music.getGenres().contains(genre) && !this.musicList.contains(music) && ((explicitOnly &&  music instanceof ExplicitMusic) || !explicitOnly)) {
+                this.addMusic(music);
+                numberOfSongs++;
+
             }
-            if (totalDuration >= duration * 0.92) {
+            if (numberOfSongs >= 11) {
                 return;
             }
         }
-
     }
     
 }

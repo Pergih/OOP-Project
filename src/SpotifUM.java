@@ -216,7 +216,7 @@ public class SpotifUM implements Serializable {
     public int getNumberPublicPlaylists() {
         int count = 0;
         for (Playlist playlist : playlists.values()) {
-            if (playlist instanceof PublicPlaylist) {
+            if (playlist.getIsPublic()) {
                 count++;
             }
         }

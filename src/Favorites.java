@@ -3,7 +3,7 @@ import java.util.*;
 public class Favorites extends Playlist {
 
     public Favorites(String name, User creator, SpotifUM spotifUM) {
-        super(name, new ArrayList<>(), creator);
+        super(name, new ArrayList<>(), creator, false);
 
         Map<Genre, Integer> genreListeningStats = creator.buildGenreStats(spotifUM);
 

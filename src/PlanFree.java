@@ -8,7 +8,7 @@ public class PlanFree extends Plan {
     }
 
     public boolean allows(Class<? extends MusicCollection> collectionType) {
-        return !(collectionType == Favorites.class || collectionType == PrivatePlaylist.class);
+        return collectionType == RandomPlaylist.class;
     }
-    
+
 }
