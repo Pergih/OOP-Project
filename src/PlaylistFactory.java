@@ -35,7 +35,7 @@ public class PlaylistFactory {
         Playlist pp;
         if(creator.getHandle()=="admin"){
             
-            pp= new Playlist(name, songs, creator, false);
+            pp= new Playlist(name, songs, creator);
             user.addToLibrary(pp);
             spotifUM.addPlaylist(pp);
             return pp;
@@ -58,7 +58,7 @@ public class PlaylistFactory {
                 break;
             default:
                 System.out.println("Invalid option, defaulting to Private Playlist.");
-                pp=new Playlist(name, songs, creator, false);
+                pp=new Playlist(name, songs, creator);
                 spotifUM.addPlaylist(pp);
 
         }

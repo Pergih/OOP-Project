@@ -30,7 +30,7 @@ public class Playlist implements MusicCollection, Serializable {
         this.creator = creator;
         this.isPublic = false;
     }
-    
+
     public Playlist(Playlist p) {
         this.creator = p.getCreator();
         this.musicList = p.getMusicList();
@@ -48,6 +48,7 @@ public class Playlist implements MusicCollection, Serializable {
         sb.append("Creator: ").append(creator != null ? creator.getHandle() : "Unknown").append('\n');
         sb.append("Total Duration: ").append(getDuration()).append(" seconds\n");
         sb.append("Total Streams: ").append(getStreams()).append('\n');
+        sb.append("Visibility: ").append(isPublic ? "Public" : "Private").append('\n');
         sb.append("Music List:\n");
 
         if (musicList.isEmpty()) {
