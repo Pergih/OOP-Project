@@ -230,10 +230,7 @@ public class SpotifUM implements Serializable {
     }
 
     // change this when we solve the playlist public thing
-    public int getNumberPublicPlaylists() throws NoPlaylistsException {
-        if (playlists.isEmpty()) {
-            throw new NoPlaylistsException("No playlists available.");
-        }
+    public int getNumberPublicPlaylists() {
         int count = 0;
         for (Playlist playlist : playlists.values()) {
             if (playlist.getIsPublic()) {

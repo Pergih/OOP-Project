@@ -874,15 +874,10 @@ public class MenuHandler {
                     break;
                 case "6":
                     // count the number of public playlists
-                    try {
-                        int count = spotifUM.getNumberPublicPlaylists();
-                        System.out.println("Number of public playlists: " + count);
-                    } catch (NoPlaylistsException e) {
-                        System.out.println(e);
-                    }
+                    int count = spotifUM.getNumberPublicPlaylists();
+                    System.out.println("Number of public playlists: " + count);
                     break;
                 case "7":
-                    // sort allUsers by library size
                     try {
                         User top = spotifUM.getUserWithMostPlaylists();
                         if (top != null) {
