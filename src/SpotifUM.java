@@ -118,7 +118,11 @@ public class SpotifUM implements Serializable {
         return randomPlaylists.get(randomPlaylistString);
     }
 
-    public Music getMostPlayedMusic() {
+    public Music getMostPlayedMusic () throws NoMusicsException  {
+
+        if (musics.isEmpty()) {
+            throw new NoMusicsException("No musics available.");
+        }
         Music r = null;
         for (Music m : musics.values()) {
             if (r == null || m.getStreams() > r.getStreams()) {
@@ -128,7 +132,10 @@ public class SpotifUM implements Serializable {
         return r;
     }
 
-    public String getMostListenedInterpreter() {
+    public String getMostListenedInterpreter()  throws NoMusicsException {
+        if (musics.isEmpty()) {
+            throw new NoMusicsException("No musics available.");
+        }
         String r = null;
         int maxStreams = -1;
 
@@ -150,7 +157,10 @@ public class SpotifUM implements Serializable {
         return r;
     }
 
-    public User getTopListener(LocalDateTime start, LocalDateTime end) {
+    public User getTopListener(LocalDateTime start, LocalDateTime end) throws NoUsersException {
+        if (users.isEmpty()) {
+            throw new NoUsersException("No users available.");
+        }
         User topUser = null;
         int maxCount = -1;
 
@@ -175,7 +185,10 @@ public class SpotifUM implements Serializable {
         return topUser;
     }
 
-    public User getMostPointsUser() {
+    public User getMostPointsUser() throws NoUsersException {
+        if (users.isEmpty()) {
+            throw new NoUsersException("No users available.");
+        }
         User topUser = null;
         int maxPoints = -1;
 
@@ -213,7 +226,10 @@ public class SpotifUM implements Serializable {
     }
 
     // change this when we solve the playlist public thing
-    public int getNumberPublicPlaylists() {
+    public int getNumberPublicPlaylists() throws NoPlaylistsException {
+        if (playlists.isEmpty()) {
+            throw new NoPlaylistsException("No playlists available.");
+        }
         int count = 0;
         for (Playlist playlist : playlists.values()) {
             if (playlist.getIsPublic()) {
@@ -223,7 +239,10 @@ public class SpotifUM implements Serializable {
         return count;
     }
 
-    public User getUserWithMostPlaylists() {
+    public User getUserWithMostPlaylists() throws NoUsersException {
+        if (users.isEmpty()) {
+            throw new NoUsersException("No users available.");
+        }
         User topUser = null;
         int maxPlaylists = -1;
 

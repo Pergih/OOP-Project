@@ -152,8 +152,7 @@ public class MenuHandler {
                             continue;
                         }
                         showMusicMenu(user, music);
-                    }
-                    else {
+                    } else {
                         System.out.println("Not an Option");
                     }
 
@@ -671,9 +670,13 @@ public class MenuHandler {
                     break;
 
                 case "2":
-                    Album newAlbum = AlbumFactory.create(scanner, spotifUM);
-                    spotifUM.addAlbum(newAlbum);
-                    System.out.println("Album created: " + newAlbum.getName());
+                    try {
+                        Album newAlbum = AlbumFactory.create(scanner, spotifUM);
+                        spotifUM.addAlbum(newAlbum);
+                        System.out.println("Album created: " + newAlbum.getName());
+                    } catch (NoMusicsException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "3":
                     Playlist newPlaylist = PlaylistFactory.create(scanner, spotifUM, adminUser);
@@ -730,14 +733,20 @@ public class MenuHandler {
 
             switch (input) {
                 case "1":
-                    // search for the most played song
-                    System.out.println(spotifUM.getMostPlayedMusic().toString());
+                    try {
+                        System.out.println(spotifUM.getMostPlayedMusic().toString());
+                    } catch (NoMusicsException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "2":
-                    // make a map with the interpreters and the number of streams
-                    String r = spotifUM.getMostListenedInterpreter();
-                    System.out.println("Most listened to interpreter: " + r + " with "
-                            + spotifUM.getMusic(r).getStreams() + " streams");
+                    try {
+                        String r = spotifUM.getMostListenedInterpreter();
+                        System.out.println("Most listened to interpreter: " + r + " with "
+                                + spotifUM.getMusic(r).getStreams() + " streams");
+                    } catch (NoMusicsException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "3":
                     System.out.println("Do you want to check:");
@@ -748,7 +757,11 @@ public class MenuHandler {
 
                     switch (choice) {
                         case "1":
-                            spotifUM.getTopListener(null, null);
+                            try {
+                                spotifUM.getTopListener(null, null);
+                            } catch (NoUsersException e) {
+                                System.out.println(e);
+                            }
                             break;
 
                         case "2":
@@ -761,7 +774,11 @@ public class MenuHandler {
                                 String endInput = scanner.nextLine();
                                 LocalDateTime end = LocalDateTime.parse(endInput);
 
-                                spotifUM.getTopListener(start, end);
+                                try {
+                                    spotifUM.getTopListener(start, end);
+                                } catch (NoUsersException e) {
+                                    System.out.println(e);
+                                }
                             } catch (DateTimeParseException e) {
                                 System.out.println(
                                         "Invalid date format. Please use yyyy-MM-ddTHH:mm (e.g., 2025-05-08T14:30).");
@@ -775,9 +792,13 @@ public class MenuHandler {
                     break;
 
                 case "4":
-                    User rr = spotifUM.getMostPointsUser();
-                    System.out.println("Most listened to interpreter: " + rr + " with "
-                            + rr.getPoints() + " streams");
+                    try {
+                        User rr = spotifUM.getMostPointsUser();
+                        System.out.println("Most listened to interpreter: " + rr + " with "
+                                + rr.getPoints() + " streams");
+                    } catch (NoUsersException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "5":
                     Genre topGenre = spotifUM.getMostPlayedGenre();
@@ -785,17 +806,24 @@ public class MenuHandler {
                     break;
                 case "6":
                     // count the number of public playlists
-
-                    int count = spotifUM.getNumberPublicPlaylists();
-                    System.out.println("Number of public playlists: " + count);
+                    try {
+                        int count = spotifUM.getNumberPublicPlaylists();
+                        System.out.println("Number of public playlists: " + count);
+                    } catch (NoPlaylistsException e) {
+                        System.out.println(e);
+                    }
                     break;
                 case "7":
                     // sort allUsers by library size
-                    User top = spotifUM.getUserWithMostPlaylists();
-                    if (top != null) {
-                        System.out.println("User with the most playlists: " + top.getName());
-                    } else {
-                        System.out.println("No user found.");
+                    try {
+                        User top = spotifUM.getUserWithMostPlaylists();
+                        if (top != null) {
+                            System.out.println("User with the most playlists: " + top.getName());
+                        } else {
+                            System.out.println("No user found.");
+                        }
+                    } catch (NoUsersException e) {
+                        System.out.println(e);
                     }
 
                     break;
