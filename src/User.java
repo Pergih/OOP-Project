@@ -213,28 +213,6 @@ public class User implements Serializable {
         history.add(stream);
     }
 
-    public List<String> getLastNMusicNames(int n) {
-        List<String> names = new ArrayList<>();
-        int start = Math.max(0, history.size() - n);
-
-        for (int i = start; i < history.size(); i++) {
-            names.add(history.get(i).getMusicName());
-        }
-        return names;
-    }
-
-    public List<String> getMusicBetween(LocalDateTime start, LocalDateTime end) {
-        List<String> names = new ArrayList<>();
-
-        for (Streamed s : history) {
-            LocalDateTime time = s.getTime();
-            if ((start == null || !time.isBefore(start)) && (end == null || !time.isAfter(end))) {
-                names.add(s.getMusicName());
-            }
-        }
-        return names;
-    }
-
     public Boolean canSkip() {
         return true;
     }

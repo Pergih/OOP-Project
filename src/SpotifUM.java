@@ -15,7 +15,7 @@ public class SpotifUM implements Serializable {
         musics = new HashMap<String, Music>();
         albums = new HashMap<String, Album>();
         playlists = new HashMap<String, Playlist>();
-        randomPlaylists = new HashMap<>();
+        randomPlaylists = new HashMap<String, RandomPlaylist>();
     }
 
     // Getters
