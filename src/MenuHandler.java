@@ -219,6 +219,7 @@ public class MenuHandler {
                     break;
                 case "11":
                     System.out.println("Subscripton Plan: " + user.getPlan());
+                    break;
                 case "0":
                     return;
             }
@@ -238,6 +239,13 @@ public class MenuHandler {
             System.out.println("1. Show your Library");
             System.out.println("2. Play");
             System.out.println("3. Create a Playlist");
+            if (user.getPlan().allows(Favorites.class)) {
+                System.out.println("4. Create your Favourite Playlist");
+            }
+
+            if (user.getPlan().allows(GenPlaylist.class)) {
+                System.out.println("5. Generate a Playlist");
+            }
             System.out.println("0. Exit");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
@@ -265,6 +273,21 @@ public class MenuHandler {
                 case "3":
                     Playlist newPlaylist = PlaylistFactory.create(scanner, spotifUM, user);
                     System.out.println("Playlist created: " + newPlaylist.getName());
+                    break;
+
+                case "4":
+                    if (user.getPlan().allows(Favorites.class)) {
+
+                        Favorites newFavorites = new Favorites("Favourite " + LocalDateTime.now().toString(), user,
+                                spotifUM);
+                        System.out.println("Playlist created: " + newFavorites.getName());
+                    }
+                    else {
+                        System.out.println("Not an Option");
+                    }
+                    break;
+                case "5":
+                    // to do gen playlist menu
                     break;
 
                 case "0":
