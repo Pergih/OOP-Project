@@ -16,7 +16,7 @@ public class MusicFactory {
      */
     public static Music create(Scanner scanner, SpotifUM spotifUM) {
 
-        System.out.print("Music name: ");
+        System.out.println("Music name: ");
         String name = scanner.nextLine();
         // interpreter
         HashSet<String> interpreter = new HashSet<>();

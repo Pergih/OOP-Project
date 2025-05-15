@@ -12,13 +12,13 @@ public class UserFactory {
      
      */
     public static User create (Scanner scanner) {
-        System.out.print("Handle: ");
+        System.out.println("Handle: ");
         String handle = scanner.nextLine();
-        System.out.print("Name: ");
+        System.out.println("Name: ");
         String name = scanner.nextLine();
-        System.out.print("Email: ");
+        System.out.println("Email: ");
         String email = scanner.nextLine();
-        System.out.print("Address: ");
+        System.out.println("Address: ");
         String address = scanner.nextLine();
 
         System.out.println("Choose a plan:");

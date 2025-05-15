@@ -20,7 +20,7 @@ public class AlbumFactory {
             throw new NoMusicsException("No musics available to create an album.");
         }
 
-        System.out.print("Name: ");
+        System.out.println("Name: ");
         String name = scanner.nextLine();
 
         ArrayList<Music> songs = new ArrayList<>();
@@ -53,13 +53,14 @@ public class AlbumFactory {
     public static Album create(Scanner scanner, SpotifUM spotifUM, Music music){
         ArrayList<Music> songs = new ArrayList<>();
         HashSet<String> authors = new HashSet<>();
-
+        System.out.println("Name: ");
+        String name = scanner.nextLine();
         songs.add(music);
         for (String aut : music.getInterpreter()) {
             authors.add(aut);
         }
 
-        return new Album(music.getName(), songs, authors);
+        return new Album(name, songs, authors);
     }
 
 }

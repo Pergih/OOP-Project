@@ -15,7 +15,7 @@ public class PlaylistFactory {
     public static Playlist create(Scanner scanner,SpotifUM spotifUM,User user){
         User creator = user;
 
-        System.out.print("Name: ");
+        System.out.println("Name: ");
         String name = scanner.nextLine();
         ArrayList<Music> songs = new ArrayList<>();
         System.out.println( "Songs you can choose"+ spotifUM.getMusicNames().toString());

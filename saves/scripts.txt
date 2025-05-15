@@ -6,13 +6,13 @@ pepega's house
 3
 2
 user1
-user sob1
+user withPremiumBase
 user1@gmail.com
 casa do user 1
 2
 2
 user2
-user sob2
+user withFREE
 user2@gmail.com
 casa do user 2
 1
@@ -81,7 +81,6 @@ END
 1
 2
 A Night at the Opera
-END
 1
 MUSICA1
 AUTOR1
@@ -100,7 +99,6 @@ END
 2
 2
 ALBUM1
-END
 1
 MUSICA2
 AUTOR2
@@ -116,9 +114,9 @@ END
 DO2 RE2 MI2 FA2 SOL2 LA2 SI2 DO2
 END
 80
+1
 2
 ALBUM2
-END
 1
 MUSICA3
 AUTOR4
@@ -155,7 +153,6 @@ END
 1
 2
 ALBUM3
-END
 2
 ALBUM4
 MUSICA1
@@ -188,5 +185,26 @@ MUSICA3
 END
 2
 0
+0
+3
+1
+MusicaTodas
+MegaARTISTA
+END
+MegaProdutora
+ROCK,POP,JAZZ,CLASSICAL,HIPHOP,ELECTRONIC,FUNK,COUNTRY,RNB,SOUL
+letra da mega musica
+banana nao tem caroco 
+nao tem caroco 
+nao tem nao tem
+END
+DO DO DO DO DO DO DO
+RE
+MI MI MI MI MI
+END
+33
+1
+2
+Album5
 0
 0

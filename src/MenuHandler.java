@@ -110,6 +110,7 @@ public class MenuHandler {
                 System.out.println("7. Show all public Playlists");
                 System.out.println("8. Play a public playlist");
             }
+            
             System.out.println("9. Show user's history");
             System.out.println("10. My Points");
             System.out.println("11. Show Subscription Plan");
@@ -210,7 +211,7 @@ public class MenuHandler {
                         System.out.println("Not an Option");
                     }
                     break;
-
+                
                 case "9":
                     System.out.println(
                             "Showing user's history from the oldest to the most recent: \n" + user.historyToString());
@@ -244,11 +245,9 @@ public class MenuHandler {
             }
 
             if (user.getPlan().allows(GenPlaylist.class)) {
-                System.out.println("5. Generate a Playlist");
+                System.out.println("5. Generate a Playlist according to criteria");
             }
-            if (user.getPlan().allows(Playlist.class)) {
-                System.out.println("6. Make Playlist Public/Private");
-            }
+            
             System.out.println("0. Exit");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
@@ -291,29 +290,6 @@ public class MenuHandler {
                 case "5":
                     // to do gen playlist menu
                     break;
-                case "6":
-                    System.out.println("Your Library: \n" + user.libraryToString());
-                    System.out.print("Enter the Playlist to change visibility (or 'exit'): ");
-                    String collectionString2 = scanner.nextLine();
-                    if (collectionString2.equalsIgnoreCase("exit"))
-                        break;
-                    MusicCollection mc2 = user.getFromLibrary(collectionString2);
-                    if (mc2 instanceof Album) {
-                        System.out.println(
-                                "You selected an Album, whose visibility settings cannot be changed. Please select a Playlist.\n");
-                        break;
-                    } else if (mc2 instanceof Playlist) {
-                        System.out.println(
-                                "You selected this Playlist: \n" + mc2.toString());
-                                if (((Playlist) mc2).getIsPublic() == true) {
-                                    ((Playlist)mc2).makePrivate(spotifUM);
-                                    System.out.println("Playlist is now private.");
-                                }
-                                else {
-                                    ((Playlist)mc2).makePublic(spotifUM);
-                                    System.out.println("Playlist is now public.");
-                                }
-                        break;
 
                     } else {
                         System.out.println("Playlist not found");
@@ -884,4 +860,6 @@ public class MenuHandler {
             }
         }
     }
+    
+   
 }
