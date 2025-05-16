@@ -306,27 +306,12 @@ public class MenuHandler {
                         System.out.println(
                                 "You selected this Playlist: \n" + mc2.toString() + "\n");
                                 if (((Playlist) mc2).getIsPublic() == true) {
-                                    System.out.println("This Playlist is public. Do you want to make it private?");
-                                    System.out.println("1. Yes");
-                                    System.out.println("0. No");
-                                    String choice2 = scanner.nextLine();
-                                    if (choice2.equals("1")) {
-                                        ((Playlist) mc2).makePrivate(spotifUM);
-                                        System.out.println("Playlist is now private.");
-                                    } else {
-                                        System.out.println("Playlist remains public.");
-                                    }
-                                } else {
-                                    System.out.println("This Playlist is private. Do you want to make it public?");
-                                    System.out.println("1. Yes");
-                                    System.out.println("0. No");
-                                    String choice2 = scanner.nextLine();
-                                    if (choice2.equals("1")) {
-                                        ((Playlist) mc2).makePublic(spotifUM);
-                                        System.out.println("Playlist is now public.");
-                                    } else {
-                                        System.out.println("Playlist remains private.");
-                                    }
+                                    ((Playlist)mc2).makePrivate(spotifUM);
+                                    System.out.println("Playlist is now private.\n ");
+                                }
+                                else {
+                                    ((Playlist)mc2).makePublic(spotifUM);
+                                    System.out.println("Playlist is now public.\n ");
                                 }
                         break;
 
