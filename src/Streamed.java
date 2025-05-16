@@ -3,24 +3,24 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Streamed implements Serializable{
-    private String musicName;
+    private Music music;
     private LocalDateTime time;
 
 
     // Constructors
 
     public Streamed() {
-        this.musicName = new String();
+        this.music = new NormalMusic();
         this.time = LocalDateTime.now();
     }
 
-    public Streamed(String musicName, LocalDateTime time) {
-        this.musicName = musicName;
+    public Streamed(Music music, LocalDateTime time) {
+        this.music = music;
         this.time = time;
     }
 
     public Streamed(Streamed other) {
-        this.musicName = other.musicName;
+        this.music = other.music;
         this.time = other.time;
     }
 
@@ -28,8 +28,8 @@ public class Streamed implements Serializable{
      * Getters e Setters
      */
 
-    public String getMusicName() {
-        return musicName;
+    public Music getMusic() {
+        return music;
     }
 
     public LocalDateTime getTime() {
@@ -38,8 +38,8 @@ public class Streamed implements Serializable{
 
 
     
-    public void setMusicName(String musicName) {
-        this.musicName = musicName;
+    public void setMusic(Music music) {
+        this.music = music;
     }
 
     public void setTime(LocalDateTime time) {
@@ -59,13 +59,13 @@ public class Streamed implements Serializable{
         if (o == null || getClass() != o.getClass()) return false;
 
         Streamed streamed = (Streamed) o;
-        return Objects.equals(musicName, streamed.musicName) &&
+        return Objects.equals(music, streamed.music) &&
                Objects.equals(time, streamed.time);
     }
 
     public String toString() {
         return "Streamed{" +
-                "musicName='" + musicName + '\'' +
+                "musicName='" + music + '\'' +
                 ", time=" + time +
                 '}';
     }

@@ -210,7 +210,7 @@ public class User implements Serializable {
         this.points += plan.getPointsOnStream(this);
 
         // adding to history
-        Streamed stream = new Streamed(music.getName(), LocalDateTime.now());
+        Streamed stream = new Streamed(music, LocalDateTime.now());
         history.add(stream);
     }
 
@@ -235,8 +235,8 @@ public class User implements Serializable {
         // The most recent ones are always on the end of the arrayList
         int start = Math.max(history.size() - 100, 0);
         for (int i = start; i < history.size(); i++) {
-            Streamed streamed = history.get(i);
-            Music music = spotifUM.getMusic(streamed.getMusicName());
+            Music music = history.get(i).getMusic();
+            
             if (music != null) {
                 for (Genre genre : music.getGenres()) {
                     genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
