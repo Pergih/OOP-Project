@@ -133,12 +133,6 @@ public class User implements Serializable {
      * clone equals toString
      */
 
-    // Shallow clone for User
-
-    // public User clone() {
-    //     return new User(this);
-    // }
-
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -179,10 +173,18 @@ public class User implements Serializable {
 
     public String libraryToString() {
         StringBuilder sb = new StringBuilder();
+
         for (MusicCollection mc : library) {
-            String type = mc.getClass().getSimpleName(); // Gets "Album", "PublicPlaylist", etc.
-            sb.append("[").append(type).append("] ").append(mc.getName()).append("\n");
+            String type = mc.getClass().getSimpleName();
+            sb.append("[").append(type).append("] ").append(mc.getName());
+
+            if (mc instanceof Playlist playlist) {
+                sb.append(" [").append(playlist.getIsPublic() ? "Public" : "Private").append("]");
+            }
+
+            sb.append("\n");
         }
+
         return sb.toString();
     }
 
@@ -206,7 +208,6 @@ public class User implements Serializable {
 
         // adding the points
         this.points += plan.getPointsOnStream(this);
-        
 
         // adding to history
         Streamed stream = new Streamed(music.getName(), LocalDateTime.now());
@@ -225,7 +226,7 @@ public class User implements Serializable {
         MusicCollection toRemove = getFromLibrary(name);
         if (toRemove != null) {
             library.remove(toRemove);
-        }   
+        }
     }
 
     public Map<Genre, Integer> buildGenreStats(SpotifUM spotifUM) {
