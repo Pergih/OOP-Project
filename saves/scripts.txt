@@ -1,6 +1,6 @@
 2
 pepega
-pepe
+pepe PremiumTop.
 pepega@hotmail.com
 pepega's house
 3
@@ -82,129 +82,174 @@ END
 2
 A Night at the Opera
 1
-MUSICA1
-AUTOR1
-AUTOR2
+Crimson Horizon
+Midnight Reverie
 END
-Produtora1
+Aurora Wave Studios
 ROCK,HIPHOP
-letra da musica 1
-isto faz parte da musica1
-isto faz parte da musica1
-isto faz parte da musica1 
+Red skies burn over ocean tides
+The sun sets slow, where sorrow hides
+I hold your name in winds that cry
+And chase your shadow through the sky
+
+Time won't wait for hearts to heal
+We break apart, yet still we feel
+One last word, a silent plea
+Drifting out with memory 
 END
-DO RE MI FA SOL LA SI DO
+A C D E F E D C A
+A G A C B A G F# E
 END
-60
+267
 2
 2
-ALBUM1
+Echoes in the Dusk
 1
-MUSICA2
-AUTOR2
-AUTOR3
+Glass Skies
+Midnight Reverie
 END
-Produtora2
+Aurora Wave Studios
 JAZZ,CLASSICAL
-letra da musica 2
-isto faz parte da musica2
-isto faz parte da musica2
-isto faz parte da musica2
+You walked on glass skies, never fell through
+Balancing clouds with a dream so true
+Your voice still echoes in crystal rain
+Soft as moonlight, sharp as pain
+
+I called your name in silent screams
+But you were lost in shattered dreams
+Glass skies fading into grey
+You're still the night, I'm still the day
 END
-DO2 RE2 MI2 FA2 SOL2 LA2 SI2 DO2
+E E G F# A G F# E D
+B A G F# E G F# E
 END
-80
+238
 1
-2
-ALBUM2
 1
-MUSICA3
-AUTOR4
+Echoes in the Dusk
+1
+Digital Ghosts
+Neon Soul
 END
-Produtora3
-POP
-letra da musica 3
-isto faz parte da musica3
-isto faz parte da musica3
-isto faz parte da musica3
+PulsePoint Music
+ELECTRONIC
+We are ghosts inside the wires
+Sparks ignite our deep desires
+Through the code and binary
+We breathe in beats electronically
+
+Heartbeats lost in loops and lines
+We fade in synths, forget the signs
+Virtual dreams behind the screen
+Where nothing’s ever what it seems
 END
-DO3 RE3 MI3 FA3 SOL3 LA3 SI3 DO3
+C# D E F# G# A G# F#
+E D E F# A G# F# E
 END
-200
+222
 3
 7
-1
-ALBUM1
-1
-MUSICA4
-AUTOR5
-AUTOR6
-END
-Produtora4
-JAZZ
-letra da musica 4
-isto faz parte da musica4
-isto faz parte da musica4
-isto faz parte da musica4 
-END
-DO4 RE4 MI4 FA4 SOL4 LA4 SI4 DO4
-END
-120
-1
 2
-ALBUM3
+Electric Phantoms
+1
+City of Static
+Neon Soul
+Midnight Reverie
+END
+PulsePoint Music
+COUNTRY
+Flashing lights, electric veins
+Running fast through digital lanes
+Lost in echoes, neon pain
+Love in loops that start again
+
+Caught between what’s real and code
+Hearts corrupted, overload
+Still we dance through broken sound
+Where no silence can be found
+END
+G# A B A G# F# E D#
+F# G# A B C# B A G#
+END
+251
+1
+1
+Electric Phantoms
+1
+From Ashes We Sing
+Ember Vale
+END
+Phoenix Sound
+RNB
+From ashes we rise, from silence we scream
+Chasing the light in a dying dream
+Burned and broken, yet still we fight
+Carving hope in the heart of night
+
+With every fall, we learn to fly
+With every tear, we paint the sky
+Our voices blaze like fire and string
+From ashes, once more, we sing
+END
+D F G A Bb A G F
+G A Bb C D C Bb A
+END
+306
 2
-ALBUM4
-MUSICA1
-MUSICA4
+2
+Rebirth and Ruin
+2
+AlbumCriado1
+From Ashes We Sing
+City of Static
+Bohemian Rhapsody
 END
 3
-PLAYLIST1
-MUSICA3
-MUSICA2
+PlaylistCriada1
+Digital Ghosts
+Crimson Horizon
 END
 0
 1
 pepega
 6
-ALBUM1
+AlbumCriado1
 3
 0
 1
 3
-PLAYLIST2
-MUSICA2
-MUSICA4
-MUSICA1
+PlaylistCriada2
+Digital Ghosts
+Bohemian Rhapsody
 END
 1
 3
-PLAYLIST3
-MUSICA1
-MUSICA3
+PlaylistCriada3
+City of Static
+Crimson Horizon
 END
 2
 0
 0
 3
 1
-MusicaTodas
-MegaARTISTA
+MusicWithAllGenres
+Artist1
 END
-MegaProdutora
+Producer1
 ROCK,POP,JAZZ,CLASSICAL,HIPHOP,ELECTRONIC,FUNK,COUNTRY,RNB,SOUL
-letra da mega musica
-banana nao tem caroco 
-nao tem caroco 
-nao tem nao tem
+This is a text to put 
+on the lyrics of the 
+music with all Music
+with all genres
 END
-DO DO DO DO DO DO DO
-RE
-MI MI MI MI MI
+A B C D E F G 
+H I J K L M N
+O P Q R S T U 
 END
-33
+15
 1
 2
-Album5
+AlbumWithAllGenres
 0
 0
