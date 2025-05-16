@@ -304,14 +304,14 @@ public class MenuHandler {
                         break;
                     } else if (mc2 instanceof Playlist) {
                         System.out.println(
-                                "You selected this Playlist: \n" + mc2.toString() + "\n");
+                                "You selected this Playlist: \n" + mc2.toString());
                                 if (((Playlist) mc2).getIsPublic() == true) {
                                     ((Playlist)mc2).makePrivate(spotifUM);
-                                    System.out.println("Playlist is now private.\n ");
+                                    System.out.println("Playlist is now private.");
                                 }
                                 else {
                                     ((Playlist)mc2).makePublic(spotifUM);
-                                    System.out.println("Playlist is now public.\n ");
+                                    System.out.println("Playlist is now public.");
                                 }
                         break;
 

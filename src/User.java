@@ -213,10 +213,6 @@ public class User implements Serializable {
         history.add(stream);
     }
 
-    public Boolean canSkip() {
-        return true;
-    }
-
     public void addToLibrary(MusicCollection collection) {
         library.add(collection);
     }
@@ -230,18 +226,6 @@ public class User implements Serializable {
         if (toRemove != null) {
             library.remove(toRemove);
         }   
-    }
-
-    public void makePlaylistPublic(Playlist playlist, SpotifUM spotifum) {
-        if (this.plan.allows(playlist.getClass())) {
-            playlist.makePublic(spotifum);
-        } 
-    }
-
-        public void makePlaylistPrivate(Playlist playlist, SpotifUM spotifum) {
-        if (this.plan.allows(playlist.getClass())) {
-            playlist.makePrivate(spotifum);
-        } 
     }
 
     public Map<Genre, Integer> buildGenreStats(SpotifUM spotifUM) {
