@@ -145,12 +145,16 @@ public class Playlist implements MusicCollection, Serializable {
     }
 
     // ops
-    public void makePublic() {
+    public void makePublic(SpotifUM spotifum) {
         this.isPublic = true;
+        spotifum.addPlaylist(this);
+
     }
 
-    public void makePrivate() {
+    public void makePrivate(SpotifUM spotifum) {
         this.isPublic = false;
+        spotifum.removePlaylist(this);
+
     }
 
     public void addMusic(Music m) {

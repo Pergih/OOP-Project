@@ -246,6 +246,9 @@ public class MenuHandler {
             if (user.getPlan().allows(GenPlaylist.class)) {
                 System.out.println("5. Generate a Playlist");
             }
+            if (user.getPlan().allows(Playlist.class)) {
+                System.out.println("6. Make Playlist Public/Private");
+            }
             System.out.println("0. Exit");
             System.out.print("Option: ");
             String choice = scanner.nextLine();
@@ -281,14 +284,56 @@ public class MenuHandler {
                         Favorites newFavorites = new Favorites("Favourite " + LocalDateTime.now().toString(), user,
                                 spotifUM);
                         System.out.println("Playlist created: " + newFavorites.getName());
-                    }
-                    else {
+                    } else {
                         System.out.println("Not an Option");
                     }
                     break;
                 case "5":
                     // to do gen playlist menu
                     break;
+                case "6":
+                    System.out.println("Your Library: \n" + user.libraryToString());
+                    System.out.print("Enter the Playlist to change visibility (or 'exit'): ");
+                    String collectionString2 = scanner.nextLine();
+                    if (collectionString2.equalsIgnoreCase("exit"))
+                        break;
+                    MusicCollection mc2 = user.getFromLibrary(collectionString2);
+                    if (mc2 instanceof Album) {
+                        System.out.println(
+                                "You selected an Album, whose visibility settings cannot be changed. Please select a Playlist.\n");
+                        break;
+                    } else if (mc2 instanceof Playlist) {
+                        System.out.println(
+                                "You selected this Playlist: \n" + mc2.toString() + "\n");
+                                if (((Playlist) mc2).getIsPublic() == true) {
+                                    System.out.println("This Playlist is public. Do you want to make it private?");
+                                    System.out.println("1. Yes");
+                                    System.out.println("0. No");
+                                    String choice2 = scanner.nextLine();
+                                    if (choice2.equals("1")) {
+                                        ((Playlist) mc2).makePrivate(spotifUM);
+                                        System.out.println("Playlist is now private.");
+                                    } else {
+                                        System.out.println("Playlist remains public.");
+                                    }
+                                } else {
+                                    System.out.println("This Playlist is private. Do you want to make it public?");
+                                    System.out.println("1. Yes");
+                                    System.out.println("0. No");
+                                    String choice2 = scanner.nextLine();
+                                    if (choice2.equals("1")) {
+                                        ((Playlist) mc2).makePublic(spotifUM);
+                                        System.out.println("Playlist is now public.");
+                                    } else {
+                                        System.out.println("Playlist remains private.");
+                                    }
+                                }
+                        break;
+
+                    } else {
+                        System.out.println("Playlist not found");
+                        break;
+                    }
 
                 case "0":
                     System.out.println("Exiting.");

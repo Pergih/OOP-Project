@@ -232,6 +232,18 @@ public class User implements Serializable {
         }   
     }
 
+    public void makePlaylistPublic(Playlist playlist, SpotifUM spotifum) {
+        if (this.plan.allows(playlist.getClass())) {
+            playlist.makePublic(spotifum);
+        } 
+    }
+
+        public void makePlaylistPrivate(Playlist playlist, SpotifUM spotifum) {
+        if (this.plan.allows(playlist.getClass())) {
+            playlist.makePrivate(spotifum);
+        } 
+    }
+
     public Map<Genre, Integer> buildGenreStats(SpotifUM spotifUM) {
         Map<Genre, Integer> genreCounts = new HashMap<>();
 

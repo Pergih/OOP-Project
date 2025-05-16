@@ -56,6 +56,10 @@ public class SpotifUM implements Serializable {
         playlists.put(playlist.getName(), playlist);
     }
 
+    public void removePlaylist(Playlist playlist) {
+        playlists.remove(playlist.getName(), playlist);
+    }
+
     public void addRandomPlaylist(RandomPlaylist RandomPlaylist) {
         randomPlaylists.put(RandomPlaylist.getName(), RandomPlaylist);
     }
