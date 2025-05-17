@@ -240,8 +240,11 @@ Producer1
 ROCK,POP,JAZZ,CLASSICAL,HIPHOP,ELECTRONIC,FUNK,COUNTRY,RNB,SOUL
 This is a text to put 
 on the lyrics of the 
-music with all Music
-with all genres
+music with
+all genres
+just for
+testing
+purposes
 END
 A B C D E F G 
 H I J K L M N
@@ -257,5 +260,49 @@ RandomPlaylist1
 4
 RandomPlaylist2
 4
+0
+1
+pepega
+2
+2
+RandomPlaylist1
+2
+1
+1
+1
+0
+0
+6
+Echoes in the Dusk
+2
+1
+1
+0
+0
+8
+PlaylistCriada1
+2
+1
+1
+0
+0
+0
+1
+user1
+8
+PlaylistCriada2
+3
+2
+1
+1
+0
+0
+6
+A Night at the Opera
+2
+1
+0
+3
+0
 0
 0

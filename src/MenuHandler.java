@@ -413,7 +413,7 @@ public class MenuHandler {
                             return;
                         }
                     } else {
-                        pos++;
+                        
                         user.play(collection.getMusic(pos));
                     }
                     break;
