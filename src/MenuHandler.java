@@ -114,6 +114,7 @@ public class MenuHandler {
             System.out.println("9. Show user's history");
             System.out.println("10. My Points");
             System.out.println("11. Show Subscription Plan");
+            System.out.println("12. Change Subscription Plan");
 
             System.out.println("0. Exit");
             System.out.print("Option: ");
@@ -220,6 +221,30 @@ public class MenuHandler {
                     break;
                 case "11":
                     System.out.println("Subscripton Plan: " + user.getPlan());
+                    break;
+                case "12":
+                    System.out.println("Select which plan you wish to change to: ");
+                    System.out.println("1. Free Plan");
+                    System.out.println("2. Premium Base Plan");
+                    System.out.println("3. Premium Top Plan");
+                    String inputPlan = scanner.nextLine();
+                    switch (inputPlan) {
+                        case "1":
+                            PlanFree a = new PlanFree();
+                            user.setPlan(a);
+                            break;
+                        case "2":
+                            PlanBasePremium b = new PlanBasePremium();
+                            user.setPlan(b);
+                            break;
+                        case "3":
+                            PlanTopPremium c = new PlanTopPremium();
+                            user.setPlan(c);
+                            break;
+                        default:
+                            break;
+                    }
+                    System.out.println("Your new Subscripton Plan is: " + user.getPlan());
                     break;
                 case "0":
                     return;
@@ -413,7 +438,7 @@ public class MenuHandler {
                             return;
                         }
                     } else {
-                        
+
                         user.play(collection.getMusic(pos));
                     }
                     break;
