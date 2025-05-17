@@ -165,9 +165,12 @@ public class User implements Serializable {
     public String historyToString() {
         StringBuilder sb = new StringBuilder();
         for (int i = history.size() - 1; i >= 0; i--) {
-            sb.append(history.get(i)).append("\n");
+            Streamed s = history.get(i);
+            sb.append(s.getMusic().getName())
+                    .append(" — ")
+                    .append(s.getTime())
+                    .append("\n");
         }
-
         return sb.toString();
     }
 
@@ -218,10 +221,6 @@ public class User implements Serializable {
         library.add(collection);
     }
 
-   
-
-   
-
     public Map<Genre, Integer> buildGenreStats(SpotifUM spotifUM) {
         Map<Genre, Integer> genreCounts = new HashMap<>();
 
@@ -229,7 +228,7 @@ public class User implements Serializable {
         int start = Math.max(history.size() - 100, 0);
         for (int i = start; i < history.size(); i++) {
             Music music = history.get(i).getMusic();
-            
+
             if (music != null) {
                 for (Genre genre : music.getGenres()) {
                     genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
