@@ -24,7 +24,7 @@ public class GenPlaylistFactory {
                     for (Genre genre : Genre.values()) {
                         System.out.println("- " + genre.name());
                     }
-                    System.out.print("Enter a Genre to generate a Playlist (in capital)");
+                    System.out.println("Enter a Genre to generate a Playlist (in capital):");
                     String genreString = scanner.nextLine();
                     Genre genre1 = Genre.valueOf(genreString.toUpperCase());
                     pp = new GenPlaylist(name, creator, spotifUM, genre1, false);

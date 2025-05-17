@@ -251,5 +251,11 @@ END
 1
 2
 AlbumWithAllGenres
+4
+RandomPlaylist1
+3
+4
+RandomPlaylist2
+4
 0
 0
